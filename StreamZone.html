@@ -16,161 +16,146 @@
       font-family: 'Segoe UI', 'Poppins', system-ui, 'Inter', sans-serif;
       color: #e8e6e1;
       line-height: 1.4;
-      min-width: 1024px; /* تأكيد عرض سطح المكتب */
-      overflow-x: auto;
-    }
-
-    /* تثبيت عرض سطح المكتب على الهاتف */
-    @media (max-width: 1023px) {
-      body {
-        min-width: 1024px;
-        zoom: 0.9; /* تصغير بسيط لرؤية كل المحتوى */
-      }
-      .top-nav {
-        width: 1024px;
-      }
-      .page-container {
-        width: 1024px;
-        margin: 0 auto;
-        padding: 0 20px;
-      }
-      footer {
-        width: 1024px;
-        margin: 0 auto;
-      }
     }
 
     /* ========== SCROLLBAR ========== */
-    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar { width: 5px; }
     ::-webkit-scrollbar-track { background: #1a1a1a; }
     ::-webkit-scrollbar-thumb { background: #c9a03d; border-radius: 6px; }
 
-    /* ========== HEADER + NAV (ثابت مثل الحاسوب) ========== */
+    /* ========== HEADER + NAV (RESPONSIVE) ========== */
     .top-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
       background: #0f0f0f;
       border-bottom: 1px solid #2a2418;
       position: sticky;
       top: 0;
       z-index: 100;
-      width: 100%;
-      min-width: 1024px;
-      display: flex;
-      flex-wrap: nowrap;
-      justify-content: space-between;
-      align-items: center;
-      padding: 18px 40px;
+      gap: 15px;
     }
-    .logo-area { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
-    .logo-icon { font-size: 28px; background: #1e1b14; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 14px; color: #d4a373; border: 1px solid #2f2a1f; }
-    .logo-text { font-weight: 700; font-size: 1.55rem; background: linear-gradient(135deg, #e9d6b0, #c9a03d); -webkit-background-clip: text; background-clip: text; color: transparent; white-space: nowrap; }
+    .logo-area { display: flex; align-items: center; gap: 10px; }
+    .logo-icon { font-size: 24px; background: #1e1b14; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 12px; color: #d4a373; border: 1px solid #2f2a1f; }
+    .logo-text { font-weight: 700; font-size: 1.3rem; background: linear-gradient(135deg, #e9d6b0, #c9a03d); -webkit-background-clip: text; background-clip: text; color: transparent; }
     .logo-text span { color: #b8864b; }
-    .nav-links { display: flex; gap: 28px; list-style: none; flex-wrap: nowrap; }
-    .nav-links li { cursor: pointer; font-weight: 500; font-size: 1rem; transition: all 0.2s; padding: 6px 0; border-bottom: 2px solid transparent; color: #cccbc7; white-space: nowrap; }
+    .nav-links { display: flex; gap: 12px; flex-wrap: wrap; list-style: none; justify-content: center; }
+    .nav-links li { cursor: pointer; font-weight: 500; font-size: 0.8rem; transition: all 0.2s; padding: 6px 0; border-bottom: 2px solid transparent; color: #cccbc7; }
     .nav-links li:hover { color: #d4a373; border-bottom-color: #c9a03d; }
     .nav-links li.active-page { color: #e2bc7c; border-bottom-color: #d4a373; }
 
     .page-container {
-      max-width: 1400px;
-      min-width: 1024px;
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 0px 28px 70px;
-      min-height: 75vh;
+      padding: 0px 20px 50px;
+      min-height: 70vh;
     }
 
-    /* ========== BANNER ========== */
+    /* ========== BANNER RESPONSIVE ========== */
     .hero-banner {
-      position: relative; width: 100%; border-radius: 32px; overflow: hidden;
-      margin-bottom: 48px; margin-top: 16px; background: #0e0e0c;
+      position: relative; width: 100%; border-radius: 24px; overflow: hidden;
+      margin-bottom: 40px; margin-top: 16px; background: #0e0e0c;
     }
-    .hero-banner img { width: 100%; min-height: 320px; object-fit: cover; display: block; }
+    .hero-banner img { width: 100%; min-height: 220px; object-fit: cover; display: block; }
     .hero-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(135deg, rgba(0,0,0,0.65), rgba(0,0,0,0.4));
+      background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(0,0,0,0.4));
       display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
-      padding: 40px 50px;
+      padding: 20px 25px;
     }
-    .hero-overlay .pre-title { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 4px; color: #e2bc7c; background: rgba(0,0,0,0.5); padding: 4px 14px; border-radius: 40px; margin-bottom: 16px; }
-    .hero-overlay h1 { font-size: 3.2rem; font-weight: 800; color: white; text-shadow: 0 2px 12px black; margin-bottom: 20px; }
-    .hero-features { display: flex; flex-wrap: wrap; gap: 20px; margin: 12px 0 20px; }
-    .hero-features span { background: rgba(0,0,0,0.5); backdrop-filter: blur(2px); padding: 6px 18px; border-radius: 60px; border-left: 2px solid #c9a03d; font-size: 0.9rem; }
-    .price-highlight { font-size: 1.6rem; font-weight: bold; color: #f5c542; background: rgba(0,0,0,0.6); display: inline-block; padding: 8px 20px; border-radius: 60px; margin: 12px 0 18px; }
-    .hero-btn { background: #c9a03d; border: none; padding: 14px 34px; font-size: 1rem; font-weight: bold; border-radius: 50px; color: #0b0b0b; cursor: pointer; transition: 0.2s; }
-    .hero-btn:hover { background: #e2b152; transform: scale(1.02); }
+    .hero-overlay .pre-title { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 3px; color: #e2bc7c; background: rgba(0,0,0,0.5); padding: 3px 10px; border-radius: 30px; margin-bottom: 12px; }
+    .hero-overlay h1 { font-size: 1.8rem; font-weight: 800; color: white; text-shadow: 0 2px 8px black; margin-bottom: 12px; }
+    .hero-features { display: flex; flex-wrap: wrap; gap: 10px; margin: 10px 0; }
+    .hero-features span { background: rgba(0,0,0,0.55); backdrop-filter: blur(2px); padding: 4px 12px; border-radius: 40px; border-left: 2px solid #c9a03d; font-size: 0.7rem; }
+    .price-highlight { font-size: 1.3rem; font-weight: bold; color: #f5c542; background: rgba(0,0,0,0.6); display: inline-block; padding: 6px 16px; border-radius: 50px; margin: 8px 0 12px; }
+    .hero-btn { background: #c9a03d; border: none; padding: 10px 22px; font-size: 0.85rem; font-weight: bold; border-radius: 50px; color: #0b0b0b; cursor: pointer; transition: 0.2s; }
 
     /* ========== APPS GRID ========== */
-    .apps-section, .payment-section { margin: 50px 0 30px; text-align: center; }
-    .section-title-custom { font-size: 1.9rem; margin-bottom: 25px; color: #e9dbbc; border-left: 4px solid #c9a03d; padding-left: 20px; display: inline-block; text-align: left; }
+    .apps-section, .payment-section { margin: 40px 0 25px; text-align: center; }
+    .section-title-custom { font-size: 1.4rem; margin-bottom: 20px; color: #e9dbbc; border-left: 4px solid #c9a03d; padding-left: 15px; display: inline-block; text-align: left; }
     .apps-grid, .payment-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-      gap: 25px; justify-items: center; align-items: center;
-      background: #0f0f0d; padding: 32px 30px; border-radius: 48px;
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 15px; justify-items: center; align-items: center;
+      background: #0f0f0d; padding: 20px 18px; border-radius: 32px;
       border: 1px solid #2a2418; margin-bottom: 20px;
     }
     .forfaits-horizontal {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 30px;
-      margin: 30px 0 20px;
+      gap: 16px;
+      margin: 25px 0 20px;
     }
     .forfait-card {
       background: #141412;
-      border-radius: 28px;
-      padding: 22px 20px;
-      width: 220px;
+      border-radius: 24px;
+      padding: 16px 14px;
+      width: 170px;
       text-align: center;
       border: 1px solid #2a261c;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 12px;
+      gap: 8px;
       transition: all 0.25s ease;
     }
-    .forfait-card:hover { transform: translateY(-6px); border-color: #c9a03d; background: #1d1b15; box-shadow: 0 12px 24px rgba(0,0,0,0.4); }
-    .forfait-name { font-size: 1.5rem; font-weight: 700; color: #e9dbbc; }
-    .forfait-price { font-size: 2rem; font-weight: 800; color: #f5c542; background: #1f1d17; padding: 4px 18px; border-radius: 60px; display: inline-block; }
-    .forfait-price span { font-size: 0.85rem; font-weight: normal; color: #b6aa89; }
-    .btn-forfait { background: #c9a03d; border: none; padding: 10px 20px; border-radius: 40px; font-weight: bold; font-size: 0.85rem; color: #0b0b0b; cursor: pointer; width: 100%; margin-top: 6px; }
-    .whatsapp-btn { background: #25D366; border: none; padding: 10px 20px; border-radius: 40px; font-weight: bold; font-size: 0.85rem; color: white; cursor: pointer; width: 100%; text-decoration: none; display: inline-block; margin-top: 6px; }
-    .app-icon-card, .payment-card { background: #121210; border-radius: 24px; padding: 18px 12px; width: 100%; text-align: center; border: 1px solid #28241b; display: flex; flex-direction: column; align-items: center; gap: 12px; transition: all 0.2s ease; }
+    .forfait-card:hover { transform: translateY(-4px); border-color: #c9a03d; background: #1d1b15; }
+    .forfait-name { font-size: 1.2rem; font-weight: 700; color: #e9dbbc; }
+    .forfait-price { font-size: 1.5rem; font-weight: 800; color: #f5c542; background: #1f1d17; padding: 3px 12px; border-radius: 50px; display: inline-block; }
+    .forfait-price span { font-size: 0.7rem; }
+    .btn-forfait { background: #c9a03d; border: none; padding: 7px 14px; border-radius: 40px; font-weight: bold; font-size: 0.7rem; color: #0b0b0b; cursor: pointer; width: 100%; }
+    .whatsapp-btn { background: #25D366; border: none; padding: 7px 14px; border-radius: 40px; font-weight: bold; font-size: 0.7rem; color: white; cursor: pointer; width: 100%; text-decoration: none; display: inline-block; }
+    .app-icon-card, .payment-card { background: #121210; border-radius: 20px; padding: 12px 8px; width: 100%; text-align: center; border: 1px solid #28241b; display: flex; flex-direction: column; align-items: center; gap: 8px; transition: all 0.2s ease; }
     .payment-card { background: #1a2a1a; border-color: #4a6b3f; cursor: default; }
-    .payment-card:hover { transform: translateY(-3px); border-color: #c9a03d; background: #1e3320; }
-    .app-icon-card { cursor: pointer; }
-    .app-icon-card:hover { transform: translateY(-5px); border-color: #c9a03d; background: #1d1b15; }
-    .app-icon-card img, .payment-card img { width: 70px; height: 70px; object-fit: contain; background: #0a0a08; padding: 6px; }
-    .info-note { background: #1f1d17; border-radius: 28px; padding: 14px 20px; text-align: center; font-size: 0.85rem; color: #b6aa89; margin-top: 10px; }
+    .app-icon-card img, .payment-card img { width: 55px; height: 55px; object-fit: contain; background: #0a0a08; padding: 5px; border-radius: 12px; }
+    .app-icon-card span, .payment-card span { font-size: 0.7rem; font-weight: 500; color: #e2d5bc; }
+    .info-note { background: #1f1d17; border-radius: 24px; padding: 10px 15px; text-align: center; font-size: 0.7rem; color: #b6aa89; margin-top: 10px; }
 
     /* ========== PAGE TELECHARGEMENT ========== */
-    .downloads-container { display: flex; flex-direction: column; gap: 20px; max-width: 900px; margin: 30px auto; }
-    .download-item { background: #121210; border-radius: 28px; padding: 22px 28px; border: 1px solid #2a261c; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 15px; }
-    .download-info h3 { font-size: 1.3rem; color: #e9dbbc; margin-bottom: 8px; }
-    .download-code { background: #1f1d17; padding: 5px 14px; border-radius: 30px; font-size: 0.8rem; color: #c9a03d; font-family: monospace; display: inline-block; }
-    .download-actions { display: flex; gap: 15px; }
-    .download-link-btn, .copy-code-btn { padding: 10px 22px; border-radius: 40px; font-size: 0.8rem; font-weight: bold; cursor: pointer; border: none; transition: 0.2s; }
+    .downloads-container { display: flex; flex-direction: column; gap: 16px; margin: 20px auto; }
+    .download-item { background: #121210; border-radius: 24px; padding: 15px 18px; border: 1px solid #2a261c; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
+    .download-info h3 { font-size: 1rem; margin-bottom: 5px; }
+    .download-code { background: #1f1d17; padding: 3px 10px; border-radius: 30px; font-size: 0.65rem; color: #c9a03d; display: inline-block; }
+    .download-actions { display: flex; gap: 10px; }
+    .download-link-btn, .copy-code-btn { padding: 6px 14px; border-radius: 30px; font-size: 0.65rem; font-weight: bold; cursor: pointer; border: none; }
     .download-link-btn { background: #c9a03d; color: #0b0b0b; }
     .copy-code-btn { background: #25221a; border: 1px solid #3f3829; color: #ddd4c0; }
-    .download-link-btn:hover, .copy-code-btn:hover { transform: scale(1.02); background: #e2b152; color: #0b0b0b; }
 
     /* ========== MODAL ========== */
     .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(5,5,3,0.96); backdrop-filter: blur(8px); z-index: 1000; justify-content: center; align-items: center; }
     .modal-overlay.active { display: flex; }
-    .modal-card { background: #171713; border-radius: 40px; padding: 30px; max-width: 900px; width: 90%; max-height: 85vh; overflow-y: auto; border: 1px solid #c9a03d; }
-    .modal-card h2 { color: #e9dbbc; margin-bottom: 12px; border-left: 4px solid #c9a03d; padding-left: 16px; }
-    .modal-section { margin-bottom: 28px; }
-    .modal-section h3 { color: #f5c542; margin-bottom: 12px; font-size: 1.2rem; border-bottom: 1px solid #3a3525; padding-bottom: 6px; }
-    .channel-list { display: flex; flex-wrap: wrap; gap: 8px; max-height: 300px; overflow-y: auto; padding-right: 8px; }
-    .channel-tag { background: #25221a; padding: 6px 14px; border-radius: 30px; font-size: 0.75rem; color: #ddd4c0; border: 1px solid #3f3829; }
-    .close-modal-btn { background: #c9a03d; border: none; padding: 10px 28px; border-radius: 40px; font-weight: bold; cursor: pointer; margin-top: 20px; }
-    .contact-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 24px; margin-top: 20px; }
-    .contact-icon-btn { display: inline-flex; align-items: center; gap: 12px; background: #1e1c17; padding: 14px 28px; border-radius: 60px; text-decoration: none; color: #e2dccd; font-weight: 600; border: 1px solid #3f3829; }
-    .contact-icon-btn img { width: 28px; height: 28px; filter: brightness(0) invert(1); }
-    .contact-form { background: #11110e; border-radius: 32px; padding: 32px; border: 1px solid #2c281e; max-width: 720px; width: 100%; margin: 0 auto 30px; }
-    .form-group input, .form-group textarea { width: 100%; background: #1e1c17; border: 1px solid #3d3627; padding: 14px; border-radius: 18px; color: #efe6d6; }
-    .btn-send { background: #c9a03d; border: none; padding: 12px 30px; border-radius: 40px; font-weight: bold; cursor: pointer; width: 100%; }
-    .promos-slider-container { background: #0f0f0d; border-radius: 48px; padding: 32px; border: 1px solid #2a2418; margin-bottom: 30px; text-align: center; }
-    .slider-image { width: 100%; max-height: 450px; object-fit: cover; border-radius: 32px; }
-    footer { background: #090907; border-top: 1px solid #292216; padding: 40px 20px; text-align: center; font-size: 0.85rem; color: #79755f; min-width: 1024px; }
-    .page-hero.centered { text-align: center; }
+    .modal-card { background: #171713; border-radius: 32px; padding: 22px; max-width: 95%; width: 500px; max-height: 85vh; overflow-y: auto; border: 1px solid #c9a03d; }
+    .modal-card h2 { font-size: 1.3rem; margin-bottom: 12px; border-left: 4px solid #c9a03d; padding-left: 14px; }
+    .modal-section h3 { font-size: 1rem; margin-bottom: 8px; }
+    .channel-list { display: flex; flex-wrap: wrap; gap: 6px; max-height: 250px; overflow-y: auto; }
+    .channel-tag { background: #25221a; padding: 4px 10px; border-radius: 30px; font-size: 0.65rem; }
+    .close-modal-btn { background: #c9a03d; border: none; padding: 8px 20px; border-radius: 40px; font-weight: bold; cursor: pointer; margin-top: 16px; }
+    .contact-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 20px; }
+    .contact-icon-btn { display: inline-flex; align-items: center; gap: 8px; background: #1e1c17; padding: 10px 20px; border-radius: 50px; text-decoration: none; color: #e2dccd; font-weight: 600; font-size: 0.75rem; border: 1px solid #3f3829; }
+    .contact-icon-btn img { width: 20px; height: 20px; filter: brightness(0) invert(1); }
+    .contact-form { background: #11110e; border-radius: 28px; padding: 22px; margin-bottom: 20px; }
+    .form-group input, .form-group textarea { width: 100%; background: #1e1c17; border: 1px solid #3d3627; padding: 10px; border-radius: 18px; color: #efe6d6; }
+    .btn-send { background: #c9a03d; border: none; padding: 10px; border-radius: 40px; font-weight: bold; cursor: pointer; width: 100%; }
+    .promos-slider-container { background: #0f0f0d; border-radius: 32px; padding: 20px; margin-bottom: 20px; }
+    .slider-image { width: 100%; max-height: 250px; object-fit: cover; border-radius: 24px; }
+    footer { background: #090907; border-top: 1px solid #292216; padding: 25px 15px; text-align: center; font-size: 0.7rem; color: #79755f; }
+    .page-hero.centered { text-align: center; margin-bottom: 15px; }
+    .page-hero.centered h1 { font-size: 1.6rem; }
+    .page-hero.centered p { font-size: 0.85rem; }
+
+    @media (min-width: 768px) {
+      .top-nav { padding: 18px 40px; }
+      .nav-links { gap: 28px; }
+      .nav-links li { font-size: 1rem; }
+      .hero-overlay h1 { font-size: 2.8rem; }
+      .hero-overlay { padding: 40px 50px; }
+      .hero-features span { font-size: 0.85rem; padding: 5px 18px; }
+      .apps-grid, .payment-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 22px; padding: 32px 24px; }
+      .forfait-card { width: 210px; padding: 20px 18px; }
+      .section-title-custom { font-size: 1.9rem; }
+    }
   </style>
 </head>
 <body>
@@ -192,7 +177,7 @@
 
 <div id="paymentContactModal" class="modal-overlay">
   <div class="modal-card"><h2>💬 Contacter le support</h2><p>📦 Paiement & informations :</p>
-    <div class="modal-buttons" style="display:flex; flex-direction:column; gap:12px; margin:20px 0;">
+    <div style="display:flex; flex-direction:column; gap:12px; margin:20px 0;">
       <a href="https://wa.me/212670965351" target="_blank" style="background:#25221a; padding:12px; border-radius:60px; text-decoration:none; color:#e2dccd; text-align:center;">📱 WhatsApp +212 670 965 351</a>
       <a href="https://www.facebook.com/streamzoneOF/" target="_blank" style="background:#25221a; padding:12px; border-radius:60px; text-decoration:none; color:#e2dccd; text-align:center;">📘 Facebook streamzoneOF</a>
       <a href="https://t.me/KarimAbuRida" target="_blank" style="background:#25221a; padding:12px; border-radius:60px; text-decoration:none; color:#e2dccd; text-align:center;">✈️ Telegram @KarimAbuRida</a>
@@ -216,7 +201,7 @@
 
   const plansContent = {
     TEST: { live: ["📡 Test 24h - Découverte", "🎬 500 chaînes", "📞 Support 24h"], vodFilms: ["Films test"], vodSeries: ["Séries échantillon"] },
-    BASIC: { live: ["Chaînes BASIC", "France, Belgique, Suisse, Canada", "Maghreb, Moyen-Orient", "Afrique, USA, UK"], vodFilms: ["Films BASIC"], vodSeries: ["Séries BASIC"] },
+    BASIC: { live: ["Chaînes BASIC", "France, Belgique, Suisse, Canada", "Maghreb, Moyen-Orient"], vodFilms: ["Films BASIC"], vodSeries: ["Séries BASIC"] },
     STANDARD: { live: ["Chaînes STANDARD", "+15 000 chaînes", "4K Ultra HD", "Sport, News"], vodFilms: ["Films STANDARD 4K"], vodSeries: ["Séries STANDARD"] },
     PREMIUM: { live: ["Chaînes PREMIUM 4K", "BEIN SPORTS 4K", "OSN PREMIUM 4K", "Netflix AR 4K"], vodFilms: ["VOD PREMIUM 4K"], vodSeries: ["Séries PREMIUM 4K"] },
     ULTIMATE: { live: ["Ultimate 4K UHD", "Tous les sports PPV", "BEIN SPORT FULL", "DAZN MENA"], vodFilms: ["Ultimate 4K Dolby Audio"], vodSeries: ["Ultimate Series 4K"] }
@@ -225,7 +210,7 @@
   function showPlanModal(planName) {
     const data = plansContent[planName];
     if (!data) return;
-    const modalHTML = `<div class="modal-card"><h2>📺 ${planName}</h2><div class="modal-section"><h3>📡 LIVE TV</h3><div class="channel-list">${data.live.map(ch => `<span class="channel-tag">${ch}</span>`).join('')}</div></div><div class="modal-section"><h3>🎬 VOD FILMS</h3><div class="channel-list">${data.vodFilms.map(f => `<span class="channel-tag">${f}</span>`).join('')}</div></div><div class="modal-section"><h3>📺 VOD SERIES</h3><div class="channel-list">${data.vodSeries.map(s => `<span class="channel-tag">${s}</span>`).join('')}</div></div><div style="text-align:center; margin-top:20px;"><a href="https://wa.me/212670965351?text=Bonjour%2C%20je%20suis%20intéressé%20par%20le%20forfait%20${planName}" target="_blank" style="background:#25D366; display:inline-block; padding:12px 28px; border-radius:60px; color:white; text-decoration:none; font-weight:bold;">📲 Contacter WhatsApp</a><button class="close-modal-btn" onclick="closePlanModal()" style="margin-left:10px;">Fermer</button></div></div>`;
+    const modalHTML = `<div class="modal-card"><h2>📺 ${planName}</h2><div class="modal-section"><h3>📡 LIVE TV</h3><div class="channel-list">${data.live.map(ch => `<span class="channel-tag">${ch}</span>`).join('')}</div></div><div class="modal-section"><h3>🎬 VOD FILMS</h3><div class="channel-list">${data.vodFilms.map(f => `<span class="channel-tag">${f}</span>`).join('')}</div></div><div class="modal-section"><h3>📺 VOD SERIES</h3><div class="channel-list">${data.vodSeries.map(s => `<span class="channel-tag">${s}</span>`).join('')}</div></div><div style="text-align:center; margin-top:20px;"><a href="https://wa.me/212670965351?text=Bonjour%2C%20je%20suis%20intéressé%20par%20le%20forfait%20${planName}" target="_blank" style="background:#25D366; display:inline-block; padding:10px 22px; border-radius:60px; color:white; text-decoration:none; font-weight:bold; font-size:0.8rem;">📲 Contacter WhatsApp</a><button class="close-modal-btn" onclick="closePlanModal()" style="margin-left:10px;">Fermer</button></div></div>`;
     let modalOverlay = document.getElementById("planModalOverlay");
     if (!modalOverlay) { modalOverlay = document.createElement('div'); modalOverlay.id = "planModalOverlay"; modalOverlay.className = "modal-overlay"; document.body.appendChild(modalOverlay); }
     modalOverlay.innerHTML = modalHTML; modalOverlay.classList.add("active");
@@ -260,17 +245,17 @@
     { name: "Sendwave", icon: "https://raw.githubusercontent.com/MARKETTV1/images-png/refs/heads/main/images/sendwave.png" },
     { name: "CashPlus", icon: "https://raw.githubusercontent.com/MARKETTV1/images-png/refs/heads/main/images/cashplus.png" }
   ];
-  const promoImages = ["https://placehold.co/1200x400/2a2418/c9a03d?text=Promo+1+-50%25", "https://placehold.co/1200x400/2a2418/c9a03d?text=Promo+2+Pack+Familial", "https://placehold.co/1200x400/2a2418/c9a03d?text=Promo+3+12+Mois+Promo"];
+  const promoImages = ["https://placehold.co/800x400/2a2418/c9a03d?text=Promo+1", "https://placehold.co/800x400/2a2418/c9a03d?text=Promo+2", "https://placehold.co/800x400/2a2418/c9a03d?text=Promo+3"];
   let sliderInterval, currentImageIndex = 0;
   function startSlider() { if (sliderInterval) clearInterval(sliderInterval); sliderInterval = setInterval(() => { currentImageIndex = (currentImageIndex + 1) % promoImages.length; const img = document.getElementById("promosSliderImg"); if (img) img.src = promoImages[currentImageIndex]; }, 2000); }
   function stopSlider() { if (sliderInterval) clearInterval(sliderInterval); }
   async function sendEmail(formData) { const form = new FormData(); form.append("name", formData.name); form.append("email", formData.email); form.append("message", formData.message); form.append("_subject", "StreamZone Contact"); form.append("_template", "table"); try { const res = await fetch("https://formsubmit.co/ajax/karimakon08@gmail.com", { method: "POST", body: form }); return res.ok; } catch(e) { return false; } }
 
   const pagesData = {
-    accueil: { title: "Forfaits IPTV nouvelle génération", desc: "Qualité premium.", content: `<div class="hero-banner"><img src="https://raw.githubusercontent.com/MARKETTV1/images-png/refs/heads/main/acceuil.jpg" onerror="this.src='https://placehold.co/1200x400/1f1b12/c9a03d'"><div class="hero-overlay"><div class="pre-title">📡 Forfait IPTV/OTT</div><h1>StreamZone Premium</h1><div class="hero-features"><span>✨ Serveur très stable sans coupure</span><span>🔄 Mises à jour quotidiennes</span><span>📆 Service 7j/7</span><span>📺 SD / HD / FHD / 4K</span><span>🌍 +200 pays & régions</span></div><div class="price-highlight">💰 À partir de 15€</div><button class="hero-btn" id="heroForfaitsBtn">📦 Découvrir Nos Forfaits</button></div></div><div class="apps-section"><div style="text-align:center;"><h2 class="section-title-custom">📱 Applications IPTV compatibles</h2></div><div class="apps-grid" id="dynamicAppsGrid"></div></div><div class="payment-section"><div style="text-align:center;"><h2 class="section-title-custom">💳 Moyens de paiement</h2></div><div class="payment-grid" id="paymentMethodsGrid"></div><div class="info-note">Moyens de paiement acceptés — Contactez-nous</div></div>` },
+    accueil: { title: "Forfaits IPTV nouvelle génération", desc: "Qualité premium.", content: `<div class="hero-banner"><img src="https://raw.githubusercontent.com/MARKETTV1/images-png/refs/heads/main/acceuil.jpg" onerror="this.src='https://placehold.co/800x350/1f1b12/c9a03d?text=StreamZone'"><div class="hero-overlay"><div class="pre-title">📡 Forfait IPTV/OTT</div><h1>StreamZone Premium</h1><div class="hero-features"><span>✨ Serveur très stable</span><span>🔄 MàJ quotidiennes</span><span>📆 Service 7j/7</span><span>📺 SD/HD/FHD/4K</span><span>🌍 +200 pays</span></div><div class="price-highlight">💰 À partir de 15€</div><button class="hero-btn" id="heroForfaitsBtn">📦 Découvrir Nos Forfaits</button></div></div><div class="apps-section"><div style="text-align:center;"><h2 class="section-title-custom">📱 Applications IPTV compatibles</h2></div><div class="apps-grid" id="dynamicAppsGrid"></div></div><div class="payment-section"><div style="text-align:center;"><h2 class="section-title-custom">💳 Moyens de paiement</h2></div><div class="payment-grid" id="paymentMethodsGrid"></div><div class="info-note">Moyens de paiement acceptés — Contactez-nous</div></div>` },
     contact: { title: "📞 Contact & Assistance", desc: "Joignez-nous", content: `<div class="contact-form"><h3 style="margin-bottom:20px; text-align:center;">💬 Formulaire</h3><form id="contactForm"><div class="form-group"><label>Nom</label><input type="text" id="contactName" required></div><div class="form-group"><label>Email</label><input type="email" id="contactEmail" required></div><div class="form-group"><label>Message</label><textarea rows="4" id="contactMsg" required></textarea></div><button type="submit" class="btn-send">📨 Envoyer</button></form></div><div class="contact-buttons"><a href="https://wa.me/212670965351" class="contact-icon-btn"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png"> WhatsApp</a><a href="https://t.me/KarimAbuRida" class="contact-icon-btn"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png"> Telegram</a><a href="https://www.facebook.com/streamzoneOF/" class="contact-icon-btn"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png"> Facebook</a></div></div>` },
-    telechargement: { title: "📥 Téléchargements", desc: "Applications & lecteurs IPTV", content: `<div class="downloads-container" id="downloadsContainer"></div><div class="info-note">💡 Utilisez le code Downloader sur votre Firestick/Android TV pour installer directement l'application.</div>` },
-    forfaits: { title: "🎁 Nos Forfaits", desc: "Choisissez la formule adaptée", content: `<div class="forfaits-horizontal" id="forfaitsContainer"></div><div class="info-note">⚡ Cliquez sur "Voir détails" pour afficher le contenu complet du plan.</div>` },
+    telechargement: { title: "📥 Téléchargements", desc: "Applications & lecteurs IPTV", content: `<div class="downloads-container" id="downloadsContainer"></div><div class="info-note">💡 Code Downloader pour Firestick/Android TV</div>` },
+    forfaits: { title: "🎁 Nos Forfaits", desc: "Choisissez la formule adaptée", content: `<div class="forfaits-horizontal" id="forfaitsContainer"></div><div class="info-note">⚡ Cliquez sur "Voir détails" pour afficher le contenu complet.</div>` },
     promos: { title: "🎁 Promos & Offres", desc: "Réductions limitées", content: `<div class="promos-slider-container"><img id="promosSliderImg" class="slider-image" src="${promoImages[0]}"></div><div class="info-note">⭐ Contactez-nous pour profiter des offres</div>` }
   };
 
@@ -283,8 +268,8 @@
     document.querySelectorAll(".nav-links li").forEach(li => { li.classList.remove("active-page"); if (li.getAttribute("data-page") === pageId) li.classList.add("active-page"); });
     
     if (pageId === "accueil") {
-      document.getElementById("dynamicAppsGrid").innerHTML = appsList.map(app => `<div class="app-icon-card" onclick="alert('🔗 ${app.name} : disponible sur store officiel.')"><img src="${app.icon}" onerror="this.src='https://placehold.co/80x80/2c281e/c9a03d'"><span>${app.name}</span></div>`).join('');
-      document.getElementById("paymentMethodsGrid").innerHTML = paymentMethods.map(m => `<div class="payment-card"><img src="${m.icon}" onerror="this.src='https://placehold.co/65x65/2c281e/c9a03d'"><span>${m.name}</span></div>`).join('');
+      document.getElementById("dynamicAppsGrid").innerHTML = appsList.map(app => `<div class="app-icon-card" onclick="alert('🔗 ${app.name} : disponible sur store officiel.')"><img src="${app.icon}" onerror="this.src='https://placehold.co/60x60/2c281e/c9a03d'"><span>${app.name}</span></div>`).join('');
+      document.getElementById("paymentMethodsGrid").innerHTML = paymentMethods.map(m => `<div class="payment-card"><img src="${m.icon}" onerror="this.src='https://placehold.co/60x60/2c281e/c9a03d'"><span>${m.name}</span></div>`).join('');
       document.getElementById("heroForfaitsBtn")?.addEventListener("click", () => renderPage("forfaits"));
     }
     if (pageId === "forfaits") {
@@ -301,7 +286,7 @@
     }
     if (pageId === "telechargement") {
       const container = document.getElementById("downloadsContainer");
-      if (container) container.innerHTML = downloadsList.map(item => `<div class="download-item"><div class="download-info"><h3>📱 ${item.name}</h3><div class="download-code">🔔 Downloader Code: ${item.code}</div></div><div class="download-actions"><button class="copy-code-btn" onclick="copyCode('${item.code}')">📋 Copier code</button><button class="download-link-btn" onclick="downloadApp('${item.url}')">⬇️ Télécharger</button></div></div>`).join('');
+      if (container) container.innerHTML = downloadsList.map(item => `<div class="download-item"><div class="download-info"><h3>📱 ${item.name}</h3><div class="download-code">🔔 Code: ${item.code}</div></div><div class="download-actions"><button class="copy-code-btn" onclick="copyCode('${item.code}')">Copier</button><button class="download-link-btn" onclick="downloadApp('${item.url}')">Télécharger</button></div></div>`).join('');
     }
     if (pageId === "promos") startSlider(); else stopSlider();
     if (pageId === "contact") document.getElementById("contactForm")?.addEventListener("submit", async (e) => { e.preventDefault(); const name=document.getElementById("contactName").value, email=document.getElementById("contactEmail").value, msg=document.getElementById("contactMsg").value; if(!name||!email||!msg) return alert("Tous les champs sont requis."); const btn=e.target.querySelector('button[type="submit"]'), original=btn.textContent; btn.textContent="Envoi..."; btn.disabled=true; const ok=await sendEmail({name,email,message:msg}); btn.textContent=original; btn.disabled=false; alert(ok?"✅ Message envoyé !":"❌ Erreur, réessayez."); if(ok) e.target.reset(); });
