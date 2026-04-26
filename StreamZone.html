@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>StreamZone | Téléchargement</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #0b0b0b;
+      font-family: 'Segoe UI', 'Poppins', system-ui, 'Inter', sans-serif;
+      color: #e8e6e1;
+      line-height: 1.4;
+    }
+
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: #1a1a1a; }
+    ::-webkit-scrollbar-thumb { background: #c9a03d; border-radius: 6px; }
+
+    /* ========== HEADER + NAV ========== */
+    .top-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 40px;
+      background: #0f0f0f;
+      border-bottom: 1px solid #2a2418;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo-area { display: flex; align-items: center; gap: 12px; }
+    .logo-icon { font-size: 28px; background: #1e1b14; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 14px; color: #d4a373; border: 1px solid #2f2a1f; }
+    .logo-text { font-weight: 700; font-size: 1.55rem; background: linear-gradient(135deg, #e9d6b0, #c9a03d); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .logo-text span { color: #b8864b; }
+    .nav-links { display: flex; gap: 28px; flex-wrap: wrap; list-style: none; }
+    .nav-links li { cursor: pointer; font-weight: 500; font-size: 1rem; transition: all 0.2s; padding: 6px 0; border-bottom: 2px solid transparent; color: #cccbc7; }
+    .nav-links li:hover { color: #d4a373; border-bottom-color: #c9a03d; }
+    .nav-links li.active-page { color: #e2bc7c; border-bottom-color: #d4a373; }
+
+    .page-container { max-width: 1400px; margin: 0 auto; padding: 0px 28px 70px; min-height: 75vh; }
+
+    /* ========== BANNER ========== */
+    .hero-banner {
+      position: relative; width: 100%; border-radius: 32px; overflow: hidden;
+      margin-bottom: 48px; margin-top: 16px; background: #0e0e0c;
+    }
+    .hero-banner img { width: 100%; min-height: 320px; object-fit: cover; display: block; }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(0,0,0,0.65), rgba(0,0,0,0.4));
+      display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+      padding: 40px 50px;
+    }
+    .hero-overlay .pre-title { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 4px; color: #e2bc7c; background: rgba(0,0,0,0.5); padding: 4px 14px; border-radius: 40px; margin-bottom: 16px; }
+    .hero-overlay h1 { font-size: 3.2rem; font-weight: 800; color: white; text-shadow: 0 2px 12px black; margin-bottom: 20px; }
+    .hero-features { display: flex; flex-wrap: wrap; gap: 24px; margin: 12px 0 20px; }
+    .hero-features span { background: rgba(0,0,0,0.5); backdrop-filter: blur(2px); padding: 5px 15px; border-radius: 60px; border-left: 2px solid #c9a03d; }
+    .price-highlight { font-size: 1.6rem; font-weight: bold; color: #f5c542; background: rgba(0,0,0,0.6); display: inline-block; padding: 8px 20px; border-radius: 60px; margin: 12px 0 18px; }
+    .hero-btn { background: #c9a03d; border: none; padding: 14px 34px; font-size: 1rem; font-weight: bold; border-radius: 50px; color: #0b0b0b; cursor: pointer; transition: 0.2s; }
+    .hero-btn:hover { background: #e2b152; transform: scale(1.02); }
+
+    /* ========== APPS GRID ========== */
+    .apps-section, .payment-section { margin: 50px 0 30px; text-align: center; }
+    .section-title-custom { font-size: 1.9rem; margin-bottom: 25px; color: #e9dbbc; border-left: 4px solid #c9a03d; padding-left: 20px; display: inline-block; text-align: left; }
+    .apps-grid, .payment-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 22px; justify-items: center; align-items: center;
+      background: #0f0f0d; padding: 32px 24px; border-radius: 48px;
+      border: 1px solid #2a2418; margin-bottom: 20px;
+    }
+    .forfaits-horizontal {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 24px;
+      margin: 30px 0 20px;
+    }
+    .forfait-card {
+      background: #141412;
+      border-radius: 28px;
+      padding: 20px 18px;
+      width: 210px;
+      text-align: center;
+      border: 1px solid #2a261c;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      transition: all 0.25s ease;
+    }
+    .forfait-card:hover { transform: translateY(-6px); border-color: #c9a03d; background: #1d1b15; box-shadow: 0 12px 24px rgba(0,0,0,0.4); }
+    .forfait-name { font-size: 1.4rem; font-weight: 700; color: #e9dbbc; }
+    .forfait-price { font-size: 1.8rem; font-weight: 800; color: #f5c542; background: #1f1d17; padding: 4px 14px; border-radius: 60px; display: inline-block; }
+    .forfait-price span { font-size: 0.8rem; font-weight: normal; color: #b6aa89; }
+    .btn-forfait { background: #c9a03d; border: none; padding: 8px 18px; border-radius: 40px; font-weight: bold; font-size: 0.75rem; color: #0b0b0b; cursor: pointer; transition: 0.2s; width: 100%; margin-top: 6px; }
+    .btn-forfait:hover { background: #e2b152; transform: scale(1.02); }
+    .whatsapp-btn {
+      background: #25D366;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 40px;
+      font-weight: bold;
+      font-size: 0.75rem;
+      color: white;
+      cursor: pointer;
+      transition: 0.2s;
+      width: 100%;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 6px;
+    }
+    .whatsapp-btn:hover { background: #128C7E; transform: scale(1.02); }
+    .app-icon-card, .payment-card { background: #121210; border-radius: 24px; padding: 16px 10px; width: 100%; text-align: center; border: 1px solid #28241b; display: flex; flex-direction: column; align-items: center; gap: 12px; transition: all 0.2s ease; }
+    .payment-card { background: #1a2a1a; border-color: #4a6b3f; cursor: default; }
+    .payment-card:hover { transform: translateY(-3px); border-color: #c9a03d; background: #1e3320; }
+    .app-icon-card { cursor: pointer; }
+    .app-icon-card:hover { transform: translateY(-5px); border-color: #c9a03d; background: #1d1b15; }
+    .app-icon-card img, .payment-card img { width: 65px; height: 65px; object-fit: contain; border-radius: 16px; background: #0a0a08; padding: 6px; }
+    .info-note { background: #1f1d17; border-radius: 28px; padding: 12px 18px; text-align: center; font-size: 0.8rem; color: #b6aa89; margin-top: 10px; }
+
+    /* ========== PAGE TELECHARGEMENT ========== */
+    .downloads-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 800px;
+      margin: 30px auto;
+    }
+    .download-item {
+      background: #121210;
+      border-radius: 28px;
+      padding: 20px 24px;
+      border: 1px solid #2a261c;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      transition: all 0.25s ease;
+    }
+    .download-item:hover {
+      border-color: #c9a03d;
+      background: #1a1814;
+      transform: translateX(5px);
+    }
+    .download-info {
+      flex: 2;
+    }
+    .download-info h3 {
+      font-size: 1.2rem;
+      color: #e9dbbc;
+      margin-bottom: 8px;
+    }
+    .download-code {
+      display: inline-block;
+      background: #1f1d17;
+      padding: 4px 12px;
+      border-radius: 30px;
+      font-size: 0.75rem;
+      color: #c9a03d;
+      font-family: monospace;
+      margin-top: 6px;
+    }
+    .download-actions {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+    .download-link-btn {
+      background: #c9a03d;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 40px;
+      font-weight: bold;
+      font-size: 0.75rem;
+      color: #0b0b0b;
+      cursor: pointer;
+      transition: 0.2s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .download-link-btn:hover {
+      background: #e2b152;
+      transform: scale(1.02);
+    }
+    .copy-code-btn {
+      background: #25221a;
+      border: 1px solid #3f3829;
+      padding: 8px 16px;
+      border-radius: 40px;
+      font-size: 0.7rem;
+      color: #ddd4c0;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .copy-code-btn:hover {
+      background: #c9a03d;
+      color: #0b0b0b;
+      border-color: #c9a03d;
+    }
+    @media (max-width: 680px) {
+      .download-item {
+        flex-direction: column;
+        text-align: center;
+      }
+      .download-actions {
+        justify-content: center;
+      }
+    }
+
+    /* ========== MODAL ========== */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(5,5,3,0.96); backdrop-filter: blur(8px);
+      z-index: 1000; justify-content: center; align-items: center;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal-card {
+      background: #171713;
+      border-radius: 40px;
+      padding: 28px 30px;
+      max-width: 900px;
+      width: 95%;
+      max-height: 85vh;
+      overflow-y: auto;
+      text-align: left;
+      border: 1px solid #c9a03d;
+    }
+    .modal-card h2 { color: #e9dbbc; margin-bottom: 12px; border-left: 4px solid #c9a03d; padding-left: 16px; }
+    .modal-section { margin-bottom: 28px; }
+    .modal-section h3 { color: #f5c542; margin-bottom: 12px; font-size: 1.2rem; border-bottom: 1px solid #3a3525; padding-bottom: 6px; }
+    .channel-list, .vod-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; max-height: 300px; overflow-y: auto; padding-right: 8px; }
+    .channel-tag { background: #25221a; padding: 5px 12px; border-radius: 30px; font-size: 0.7rem; color: #ddd4c0; border: 1px solid #3f3829; white-space: nowrap; }
+    .close-modal-btn { background: #c9a03d; border: none; padding: 10px 28px; border-radius: 40px; font-weight: bold; cursor: pointer; margin-top: 20px; }
+    .contact-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 24px; margin-top: 20px; }
+    .contact-icon-btn { display: inline-flex; align-items: center; gap: 12px; background: #1e1c17; padding: 14px 28px; border-radius: 60px; text-decoration: none; color: #e2dccd; font-weight: 600; border: 1px solid #3f3829; }
+    .contact-icon-btn img { width: 28px; height: 28px; filter: brightness(0) invert(1); }
+    .contact-icon-btn:hover { background: #c9a03d; color: #0b0b0b; }
+    .contact-form { background: #11110e; border-radius: 32px; padding: 32px; border: 1px solid #2c281e; max-width: 720px; width: 100%; margin: 0 auto 30px; }
+    .form-group input, .form-group textarea { width: 100%; background: #1e1c17; border: 1px solid #3d3627; padding: 14px; border-radius: 18px; color: #efe6d6; }
+    .btn-send { background: #c9a03d; border: none; padding: 12px 30px; border-radius: 40px; font-weight: bold; cursor: pointer; width: 100%; }
+    .promos-slider-container { background: #0f0f0d; border-radius: 48px; padding: 32px 24px; border: 1px solid #2a2418; margin-bottom: 30px; text-align: center; }
+    .slider-image { width: 100%; max-height: 400px; object-fit: cover; border-radius: 32px; }
+    footer { background: #090907; border-top: 1px solid #292216; padding: 35px 20px; text-align: center; font-size: 0.8rem; color: #79755f; }
+    .page-hero.centered { text-align: center; }
+    @media (max-width: 760px) { .hero-overlay { padding: 20px; } .hero-overlay h1 { font-size: 1.8rem; } }
+  </style>
+</head>
+<body>
+
+<div class="top-nav">
+  <div class="logo-area"><div class="logo-icon">📡</div><div class="logo-text">Stream<span>Zone</span></div></div>
+  <ul class="nav-links">
+    <li data-page="accueil">Accueil</li>
+    <li data-page="espace-client">Mon Compte</li>
+    <li data-page="contact">Contact</li>
+    <li data-page="telechargement" class="active-page">Téléchargement</li>
+    <li data-page="promos">Promos</li>
+    <li data-page="forfaits">Nos Forfaits</li>
+  </ul>
+</div>
+
+<main id="main-app" class="page-container"></main>
+<footer><p>© 2025 StreamZone — Service IPTV haute stabilité</p><p>📍 Maroc | Support dédié</p></footer>
+
+<div id="paymentContactModal" class="modal-overlay">
+  <div class="modal-card"><h2>💬 Contacter le support</h2><p>📦 Paiement & informations :</p>
+    <div class="modal-buttons" style="display:flex; flex-direction:column; gap:12px; margin:20px 0;">
+      <a href="https://wa.me/212670965351" target="_blank" style="background:#25221a; padding:12px; border-radius:60px; text-decoration:none; color:#e2dccd; text-align:center;">📱 WhatsApp +212 670 965 351</a>
+      <a href="https://www.facebook.com/streamzoneOF/" target="_blank" style="background:#25221a; padding:12px; border-radius:60px; text-decoration:none; color:#e2dccd; text-align:center;">📘 Facebook streamzoneOF</a>
+      <a href="https://t.me/KarimAbuRida" target="_blank" style="background:#25221a; padding:12px; border-radius:60px; text-decoration:none; color:#e2dccd; text-align:center;">✈️ Telegram @KarimAbuRida</a>
+    </div>
+    <button class="close-modal-btn" onclick="closePaymentModal()">Fermer</button>
+  </div>
+</div>
+
+<script>
+  // Liste des applications à télécharger
+  const downloadsList = [
+    { name: "IBO Player", code: "1171959", url: "https://ibodesk.com/iboupdate.apk" },
+    { name: "BOB Player", code: "815778", url: "https://ibodesk.com/bob.apk" },
+    { name: "KING4K Player", code: "862414", url: "https://ibodesk.com/king4k.apk" },
+    { name: "IBO XPlayer", code: "7947185", url: "https://ibodesk.com/iboxplayer.apk" },
+    { name: "IBO PLAYER (BRAZIL)", code: "481220", url: "https://ibodesk.com/bob.apk" },
+    { name: "TIVIMATE", code: "272483", url: "https://github.com/MARKETTV1/images-png/raw/refs/heads/main/apks/tivimate.apk" }
+  ];
+
+  // Fonction pour copier le code
+  function copyCode(code) {
+    navigator.clipboard.writeText(code);
+    alert(`Code ${code} copié !`);
+  }
+
+  // Fonction pour télécharger (ouvrir l'URL)
+  function downloadApp(url) {
+    window.open(url, '_blank');
+  }
+
+  // Données des plans pour les autres pages
+  const plansContent = {
+    TEST: { live: ["📡 Test 24h"], vodFilms: ["Films test"], vodSeries: ["Séries test"] },
+    BASIC: { live: ["Chaînes BASIC"], vodFilms: ["Films BASIC"], vodSeries: ["Séries BASIC"] },
+    STANDARD: { live: ["Chaînes STANDARD"], vodFilms: ["Films STANDARD"], vodSeries: ["Séries STANDARD"] },
+    PREMIUM: { live: ["Chaînes PREMIUM"], vodFilms: ["Films PREMIUM"], vodSeries: ["Séries PREMIUM"] },
+    ULTIMATE: { live: ["Chaînes ULTIMATE"], vodFilms: ["Films ULTIMATE"], vodSeries: ["Séries ULTIMATE"] }
+  };
+
+  function showPlanModal(planName) {
+    const data = plansContent[planName];
+    if (!data) return;
+    const modalHTML = `
+      <div class="modal-card">
+        <h2>📺 ${planName}</h2>
+        <div class="modal-section"><h3>📡 LIVE TV</h3><div class="channel-list">${data.live.map(ch => `<span class="channel-tag">${ch}</span>`).join('')}</div></div>
+        <div class="modal-section"><h3>🎬 VOD FILMS</h3><div class="channel-list">${data.vodFilms.map(f => `<span class="channel-tag">${f}</span>`).join('')}</div></div>
+        <div class="modal-section"><h3>📺 VOD SERIES</h3><div class="channel-list">${data.vodSeries.map(s => `<span class="channel-tag">${s}</span>`).join('')}</div></div>
+        <div style="text-align:center; margin-top:20px;"><a href="https://wa.me/212670965351?text=Bonjour%2C%20je%20suis%20intéressé%20par%20le%20forfait%20${planName}" target="_blank" style="background:#25D366; display:inline-block; padding:12px 28px; border-radius:60px; color:white; text-decoration:none; font-weight:bold;">📲 Contacter WhatsApp</a><button class="close-modal-btn" onclick="closePlanModal()" style="margin-left:10px;">Fermer</button></div>
+      </div>
+    `;
+    let modalOverlay = document.getElementById("planModalOverlay");
+    if (!modalOverlay) {
+      modalOverlay = document.createElement('div');
+      modalOverlay.id = "planModalOverlay";
+      modalOverlay.className = "modal-overlay";
+      document.body.appendChild(modalOverlay);
+    }
+    modalOverlay.innerHTML = modalHTML;
+    modalOverlay.classList.add("active");
+    modalOverlay.onclick = (e) => { if (e.target === modalOverlay) closePlanModal(); };
+  }
+  window.closePlanModal = () => { const el = document.getElementById("planModalOverlay"); if (el) el.classList.remove("active"); };
+
+  const appsList = [
+    { name: "IBO PLAYER", icon: "https://iboplayer.com/assets/ibo-player-tZ0LjXtY.webp" },
+    { name: "FAMILY 4K PLAYER", icon: "https://iboplayer.com/assets/family-4k-CTr5g_W5.webp" },
+    { name: "BOB PLAYER", icon: "https://iboplayer.com/assets/bobplayer-DMPEZ4D1.svg" },
+    { name: "HOT PLAYER", icon: "https://hotplayer.app/logoBlackPlayer.svg" },
+    { name: "TIVIMATE", icon: "https://tivimate.com/_next/static/media/logo.97771b41.png" },
+    { name: "IBO PLAYER PRO", icon: "https://iboplayer.pro/m3u/logo-512.png" },
+    { name: "IPTV SMARTERS PRO", icon: "https://pic.clubic.com/v1/images/2194657/raw?fit=smartCrop&width=240&height=240&hash=a11708f59f5ac8f0783f475e649282fcf05e9371" },
+    { name: "DUPLEX PLAYER", icon: "https://sc.filehippo.net/images/t_app-icon-l/p/d1fa96f4-902e-46ee-a5fd-d9f5e614aead/3908985731/duplex-play-logo" },
+    { name: "ENIGMA2", icon: "https://vuplus-images.co.uk/data/attachments/27/27221-309e54304e017683069bbcb1573075da.jpg?hash=MJ5UME4Bdo" },
+    { name: "DREAM4K", icon: "https://d4kpanel.com/pntv/assets/img/dream4k1.png" },
+    { name: "EAGLE4K", icon: "https://e4kpremuim.com/e4k/assets/img/eagle4k2.png" },
+    { name: "STRONG8K", icon: "https://raw.githubusercontent.com/azroukarim/strzone/refs/heads/main/png/8k_tv_gold_new.png" },
+    { name: "NEO4K", icon: "https://raw.githubusercontent.com/azroukarim/strzone/refs/heads/main/png/neo_4k_animation.gif" },
+    { name: "DINO", icon: "https://raw.githubusercontent.com/azroukarim/strzone/refs/heads/main/png/dino.webp" },
+    { name: "TREX", icon: "https://trexiptv.tv/trexlogo.png" },
+    { name: "PYTHON", icon: "https://cms.pythonlive.net/img/logo100.png" }
+  ];
+  const paymentMethods = [
+    { name: "CIH Bank", icon: "https://raw.githubusercontent.com/MARKETTV1/images-png/refs/heads/main/images/cih-bank.png" },
+    { name: "Barid Cash", icon: "https://raw.githubusercontent.com/MARKETTV1/images-png/refs/heads/main/images/barid-cash.png" },
+    { name: "Wafacash", icon: "https://raw.githubusercontent.com/MARKETTV1/images-png/refs/heads/main/images/wafacash.png" },
+    { name: "Western Union", icon: "https://raw.githubusercontent.com/MARKETTV1/images-png/refs/heads/main/images/western-union.png" },
+    { name: "Remitly", icon: "https://raw.githubusercontent.com/MARKETTV1/images-png/refs/heads/main/images/remitly.png" },
+    { name: "Sendwave", icon: "https://raw.githubusercontent.com/MARKETTV1/images-png/refs/heads/main/images/sendwave.png" },
+    { name: "CashPlus", icon: "https://raw.githubusercontent.com/MARKETTV1/images-png/refs/heads/main/images/cashplus.png" }
+  ];
+  const promoImages = ["https://placehold.co/1200x400/2a2418/c9a03d?text=Promo+1+-50%25", "https://placehold.co/1200x400/2a2418/c9a03d?text=Promo+2+Pack+Familial", "https://placehold.co/1200x400/2a2418/c9a03d?text=Promo+3+12+Mois+Promo"];
+  let sliderInterval, currentImageIndex = 0;
+  function startSlider() { if (sliderInterval) clearInterval(sliderInterval); sliderInterval = setInterval(() => { currentImageIndex = (currentImageIndex + 1) % promoImages.length; const img = document.getElementById("promosSliderImg"); if (img) img.src = promoImages[currentImageIndex]; }, 2000); }
+  function stopSlider() { if (sliderInterval) clearInterval(sliderInterval); }
+  async function sendEmail(formData) { const form = new FormData(); form.append("name", formData.name); form.append("email", formData.email); form.append("message", formData.message); form.append("_subject", "StreamZone Contact"); form.append("_template", "table"); try { const res = await fetch("https://formsubmit.co/ajax/karimakon08@gmail.com", { method: "POST", body: form }); return res.ok; } catch(e) { return false; } }
+
+  const pagesData = {
+    accueil: { title: "Forfaits IPTV nouvelle génération", desc: "Qualité premium.", content: `<div class="hero-banner"><img src="https://raw.githubusercontent.com/MARKETTV1/images-png/refs/heads/main/acceuil.jpg" onerror="this.src='https://placehold.co/1200x400/1f1b12/c9a03d'"><div class="hero-overlay"><div class="pre-title">📡 Forfait IPTV/OTT</div><h1>StreamZone Premium</h1><div class="hero-features"><span>✨ Serveur très stable</span><span>🔄 Mises à jour quotidiennes</span><span>🔓 Sans engagement</span></div><div class="price-highlight">💰 À partir de 15€</div><button class="hero-btn" id="heroForfaitsBtn">📦 Découvrir Nos Forfaits</button></div></div><div class="apps-section"><div style="text-align:center;"><h2 class="section-title-custom">📱 Applications IPTV compatibles</h2></div><div class="apps-grid" id="dynamicAppsGrid"></div></div><div class="payment-section"><div style="text-align:center;"><h2 class="section-title-custom">💳 Moyens de paiement</h2></div><div class="payment-grid" id="paymentMethodsGrid"></div><div class="info-note">Moyens de paiement acceptés — Contactez-nous</div></div>` },
+    contact: { title: "📞 Contact & Assistance", desc: "Joignez-nous", content: `<div class="contact-form"><h3 style="margin-bottom:20px; text-align:center;">💬 Formulaire</h3><form id="contactForm"><div class="form-group"><label>Nom</label><input type="text" id="contactName" required></div><div class="form-group"><label>Email</label><input type="email" id="contactEmail" required></div><div class="form-group"><label>Message</label><textarea rows="4" id="contactMsg" required></textarea></div><button type="submit" class="btn-send">📨 Envoyer</button></form></div><div class="contact-buttons"><a href="https://wa.me/212670965351" class="contact-icon-btn"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png"> WhatsApp</a><a href="https://t.me/KarimAbuRida" class="contact-icon-btn"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png"> Telegram</a><a href="https://www.facebook.com/streamzoneOF/" class="contact-icon-btn"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png"> Facebook</a></div></div>` },
+    telechargement: { title: "📥 Téléchargements", desc: "Applications & lecteurs IPTV", content: `<div class="downloads-container" id="downloadsContainer"></div><div class="info-note">💡 Utilisez le code Downloader sur votre Firestick/Android TV pour installer directement l'application, ou cliquez sur le bouton de téléchargement.</div>` },
+    forfaits: { title: "🎁 Nos Forfaits", desc: "Choisissez la formule adaptée", content: `<div class="forfaits-horizontal" id="forfaitsContainer"></div><div class="info-note">⚡ Cliquez sur "Voir détails" pour afficher le contenu complet du plan et contacter WhatsApp.</div>` },
+    promos: { title: "🎁 Promos & Offres", desc: "Réductions limitées", content: `<div class="promos-slider-container"><img id="promosSliderImg" class="slider-image" src="${promoImages[0]}"></div><div class="info-note">⭐ Contactez-nous pour profiter des offres</div>` }
+  };
+
+  function openPaymentModal() { document.getElementById("paymentContactModal").classList.add("active"); }
+  window.closePaymentModal = () => document.getElementById("paymentContactModal").classList.remove("active");
+
+  function renderPage(pageId) {
+    const page = pagesData[pageId]; if (!page) return;
+    document.getElementById("main-app").innerHTML = `<div class="page-hero centered"><h1>${page.title}</h1><p>${page.desc}</p></div>${page.content}`;
+    document.querySelectorAll(".nav-links li").forEach(li => { li.classList.remove("active-page"); if (li.getAttribute("data-page") === pageId) li.classList.add("active-page"); });
+    
+    if (pageId === "accueil") {
+      document.getElementById("dynamicAppsGrid").innerHTML = appsList.map(app => `<div class="app-icon-card" onclick="alert('🔗 ${app.name} : disponible sur store officiel.')"><img src="${app.icon}" onerror="this.src='https://placehold.co/80x80/2c281e/c9a03d'"><span>${app.name}</span></div>`).join('');
+      document.getElementById("paymentMethodsGrid").innerHTML = paymentMethods.map(m => `<div class="payment-card"><img src="${m.icon}" onerror="this.src='https://placehold.co/65x65/2c281e/c9a03d'"><span>${m.name}</span></div>`).join('');
+      document.getElementById("heroForfaitsBtn")?.addEventListener("click", () => renderPage("forfaits"));
+    }
+    if (pageId === "forfaits") {
+      const forfaitsList = [
+        { name: "TEST", price: 2, duration: "24h" },
+        { name: "BASIC", price: 15, duration: "1 an" },
+        { name: "STANDARD", price: 30, duration: "1 an" },
+        { name: "PREMIUM", price: 40, duration: "1 an" },
+        { name: "ULTIMATE", price: 50, duration: "1 an" }
+      ];
+      const container = document.getElementById("forfaitsContainer");
+      if (container) {
+        container.innerHTML = forfaitsList.map(f => `<div class="forfait-card"><div class="forfait-name">${f.name}</div><div class="forfait-price">${f.price}€ <span>/${f.duration}</span></div><button class="btn-forfait" data-plan="${f.name}">📋 Voir détails</button><a href="https://wa.me/212670965351?text=Bonjour%2C%20je%20suis%20intéressé%20par%20le%20forfait%20${f.name}%20à%20${f.price}€" target="_blank" class="whatsapp-btn">📲 WhatsApp</a></div>`).join('');
+        document.querySelectorAll(".btn-forfait").forEach(btn => { btn.addEventListener("click", (e) => { e.stopPropagation(); const plan = btn.getAttribute("data-plan"); if (plan) showPlanModal(plan); }); });
+      }
+    }
+    if (pageId === "telechargement") {
+      const container = document.getElementById("downloadsContainer");
+      if (container) {
+        container.innerHTML = downloadsList.map(item => `
+          <div class="download-item">
+            <div class="download-info">
+              <h3>📱 ${item.name}</h3>
+              <div class="download-code">🔔 Downloader Code: ${item.code}</div>
+            </div>
+            <div class="download-actions">
+              <button class="copy-code-btn" onclick="copyCode('${item.code}')">📋 Copier code</button>
+              <button class="download-link-btn" onclick="downloadApp('${item.url}')">⬇️ Télécharger</button>
+            </div>
+          </div>
+        `).join('');
+      }
+    }
+    if (pageId === "promos") startSlider(); else stopSlider();
+    if (pageId === "contact") document.getElementById("contactForm")?.addEventListener("submit", async (e) => { e.preventDefault(); const name=document.getElementById("contactName").value, email=document.getElementById("contactEmail").value, msg=document.getElementById("contactMsg").value; if(!name||!email||!msg) return alert("Tous les champs sont requis."); const btn=e.target.querySelector('button[type="submit"]'), original=btn.textContent; btn.textContent="Envoi..."; btn.disabled=true; const ok=await sendEmail({name,email,message:msg}); btn.textContent=original; btn.disabled=false; alert(ok?"✅ Message envoyé !":"❌ Erreur, réessayez."); if(ok) e.target.reset(); });
+  }
+
+  function openEspaceModal() { let m = document.getElementById("espaceModal"); if (!m) { const d = document.createElement('div'); d.id = "espaceModal"; d.className = "modal-overlay"; d.innerHTML = `<div class="modal-card"><h2>🔐 Mon Compte</h2><p>Espace client en construction.</p><button class="close-modal-btn" onclick="closeEspaceModal()">Fermer</button></div>`; document.body.appendChild(d); m = d; } m.classList.add("active"); }
+  window.closeEspaceModal = () => { const m = document.getElementById("espaceModal"); if (m) m.classList.remove("active"); };
+  window.copyCode = copyCode;
+  window.downloadApp = downloadApp;
+  document.addEventListener("click", (e) => { if (e.target.classList?.contains("modal-overlay")) { closeEspaceModal(); closePaymentModal(); closePlanModal(); } });
+  document.querySelectorAll(".nav-links li").forEach(li => li.addEventListener("click", () => { const p = li.getAttribute("data-page"); if (p === "espace-client") openEspaceModal(); else if (p) renderPage(p); }));
+  renderPage("telechargement");
+</script>
+</body>
+</html>
