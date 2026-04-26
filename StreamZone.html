@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>StreamZone | Téléchargement</title>
+  <title>StreamZone | Plateforme IPTV</title>
   <style>
     * {
       margin: 0;
@@ -263,7 +263,7 @@
     <li data-page="accueil">Accueil</li>
     <li data-page="espace-client">Mon Compte</li>
     <li data-page="contact">Contact</li>
-    <li data-page="telechargement" class="active-page">Téléchargement</li>
+    <li data-page="telechargement">Téléchargement</li>
     <li data-page="promos">Promos</li>
     <li data-page="forfaits">Nos Forfaits</li>
   </ul>
@@ -294,24 +294,22 @@
     { name: "TIVIMATE", code: "272483", url: "https://github.com/MARKETTV1/images-png/raw/refs/heads/main/apks/tivimate.apk" }
   ];
 
-  // Fonction pour copier le code
   function copyCode(code) {
     navigator.clipboard.writeText(code);
     alert(`Code ${code} copié !`);
   }
 
-  // Fonction pour télécharger (ouvrir l'URL)
   function downloadApp(url) {
     window.open(url, '_blank');
   }
 
   // Données des plans pour les autres pages
   const plansContent = {
-    TEST: { live: ["📡 Test 24h"], vodFilms: ["Films test"], vodSeries: ["Séries test"] },
-    BASIC: { live: ["Chaînes BASIC"], vodFilms: ["Films BASIC"], vodSeries: ["Séries BASIC"] },
-    STANDARD: { live: ["Chaînes STANDARD"], vodFilms: ["Films STANDARD"], vodSeries: ["Séries STANDARD"] },
-    PREMIUM: { live: ["Chaînes PREMIUM"], vodFilms: ["Films PREMIUM"], vodSeries: ["Séries PREMIUM"] },
-    ULTIMATE: { live: ["Chaînes ULTIMATE"], vodFilms: ["Films ULTIMATE"], vodSeries: ["Séries ULTIMATE"] }
+    TEST: { live: ["📡 Test 24h - Découverte", "🎬 500 chaînes", "📞 Support 24h"], vodFilms: ["Films test", "Contenu découverte"], vodSeries: ["Séries échantillon"] },
+    BASIC: { live: ["Chaînes BASIC", "France, Belgique, Suisse, Canada", "Maghreb, Moyen-Orient", "Afrique, USA, UK"], vodFilms: ["Films BASIC", "Action, Comédie, Drame"], vodSeries: ["Séries BASIC", "Netflix, Disney+, Prime"] },
+    STANDARD: { live: ["Chaînes STANDARD", "+15 000 chaînes", "4K Ultra HD", "Sport, News, Divertissement"], vodFilms: ["Films STANDARD 4K", "Dolby Audio", "VOD illimitée"], vodSeries: ["Séries STANDARD", "Ramadan 2026", "Turques, Espagnoles, Allemandes"] },
+    PREMIUM: { live: ["Chaînes PREMIUM 4K", "BEIN SPORTS 4K", "OSN PREMIUM 4K", "Netflix AR 4K", "France 4K, UK 4K, USA Premium"], vodFilms: ["VOD PREMIUM 4K", "Disney+, HBO Max, Apple+", "Films arabes 4K"], vodSeries: ["Séries PREMIUM 4K", "MAX, Netflix 4K", "Shahid Originals 4K"] },
+    ULTIMATE: { live: ["Ultimate 4K UHD", "Tous les sports PPV", "BEIN SPORT FULL", "DAZN MENA", "USA/Canada Ultimate", "France/UK Ultimate"], vodFilms: ["Ultimate 4K Dolby Audio", "Top Movies Bluray", "Netflix Dolby Audio", "Disney+ MENA", "Paramount+, Marvel, DC"], vodSeries: ["Ultimate Series 4K", "OSN+ 4K", "HBO Max 4K", "Ramadan 4K Ultra HD", "Séries Turques 4K"] }
   };
 
   function showPlanModal(planName) {
@@ -319,7 +317,7 @@
     if (!data) return;
     const modalHTML = `
       <div class="modal-card">
-        <h2>📺 ${planName}</h2>
+        <h2>📺 ${planName} — Contenu détaillé</h2>
         <div class="modal-section"><h3>📡 LIVE TV</h3><div class="channel-list">${data.live.map(ch => `<span class="channel-tag">${ch}</span>`).join('')}</div></div>
         <div class="modal-section"><h3>🎬 VOD FILMS</h3><div class="channel-list">${data.vodFilms.map(f => `<span class="channel-tag">${f}</span>`).join('')}</div></div>
         <div class="modal-section"><h3>📺 VOD SERIES</h3><div class="channel-list">${data.vodSeries.map(s => `<span class="channel-tag">${s}</span>`).join('')}</div></div>
@@ -373,7 +371,7 @@
   async function sendEmail(formData) { const form = new FormData(); form.append("name", formData.name); form.append("email", formData.email); form.append("message", formData.message); form.append("_subject", "StreamZone Contact"); form.append("_template", "table"); try { const res = await fetch("https://formsubmit.co/ajax/karimakon08@gmail.com", { method: "POST", body: form }); return res.ok; } catch(e) { return false; } }
 
   const pagesData = {
-    accueil: { title: "Forfaits IPTV nouvelle génération", desc: "Qualité premium.", content: `<div class="hero-banner"><img src="https://raw.githubusercontent.com/MARKETTV1/images-png/refs/heads/main/acceuil.jpg" onerror="this.src='https://placehold.co/1200x400/1f1b12/c9a03d'"><div class="hero-overlay"><div class="pre-title">📡 Forfait IPTV/OTT</div><h1>StreamZone Premium</h1><div class="hero-features"><span>✨ Serveur très stable</span><span>🔄 Mises à jour quotidiennes</span><span>🔓 Sans engagement</span></div><div class="price-highlight">💰 À partir de 15€</div><button class="hero-btn" id="heroForfaitsBtn">📦 Découvrir Nos Forfaits</button></div></div><div class="apps-section"><div style="text-align:center;"><h2 class="section-title-custom">📱 Applications IPTV compatibles</h2></div><div class="apps-grid" id="dynamicAppsGrid"></div></div><div class="payment-section"><div style="text-align:center;"><h2 class="section-title-custom">💳 Moyens de paiement</h2></div><div class="payment-grid" id="paymentMethodsGrid"></div><div class="info-note">Moyens de paiement acceptés — Contactez-nous</div></div>` },
+    accueil: { title: "Forfaits IPTV nouvelle génération", desc: "Qualité premium.", content: `<div class="hero-banner"><img src="https://raw.githubusercontent.com/MARKETTV1/images-png/refs/heads/main/acceuil.jpg" onerror="this.src='https://placehold.co/1200x400/1f1b12/c9a03d'"><div class="hero-overlay"><div class="pre-title">📡 Forfait IPTV/OTT</div><h1>StreamZone Premium</h1><div class="hero-features"><span>✨ Serveur très stable sans coupure</span><span>🔄 Mises à jour quotidiennes</span><span>📆 Service 7j/7</span></div><div class="price-highlight">💰 À partir de 15€</div><button class="hero-btn" id="heroForfaitsBtn">📦 Découvrir Nos Forfaits</button></div></div><div class="apps-section"><div style="text-align:center;"><h2 class="section-title-custom">📱 Applications IPTV compatibles</h2></div><div class="apps-grid" id="dynamicAppsGrid"></div></div><div class="payment-section"><div style="text-align:center;"><h2 class="section-title-custom">💳 Moyens de paiement</h2></div><div class="payment-grid" id="paymentMethodsGrid"></div><div class="info-note">Moyens de paiement acceptés — Contactez-nous</div></div>` },
     contact: { title: "📞 Contact & Assistance", desc: "Joignez-nous", content: `<div class="contact-form"><h3 style="margin-bottom:20px; text-align:center;">💬 Formulaire</h3><form id="contactForm"><div class="form-group"><label>Nom</label><input type="text" id="contactName" required></div><div class="form-group"><label>Email</label><input type="email" id="contactEmail" required></div><div class="form-group"><label>Message</label><textarea rows="4" id="contactMsg" required></textarea></div><button type="submit" class="btn-send">📨 Envoyer</button></form></div><div class="contact-buttons"><a href="https://wa.me/212670965351" class="contact-icon-btn"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png"> WhatsApp</a><a href="https://t.me/KarimAbuRida" class="contact-icon-btn"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png"> Telegram</a><a href="https://www.facebook.com/streamzoneOF/" class="contact-icon-btn"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png"> Facebook</a></div></div>` },
     telechargement: { title: "📥 Téléchargements", desc: "Applications & lecteurs IPTV", content: `<div class="downloads-container" id="downloadsContainer"></div><div class="info-note">💡 Utilisez le code Downloader sur votre Firestick/Android TV pour installer directement l'application, ou cliquez sur le bouton de téléchargement.</div>` },
     forfaits: { title: "🎁 Nos Forfaits", desc: "Choisissez la formule adaptée", content: `<div class="forfaits-horizontal" id="forfaitsContainer"></div><div class="info-note">⚡ Cliquez sur "Voir détails" pour afficher le contenu complet du plan et contacter WhatsApp.</div>` },
@@ -434,7 +432,9 @@
   window.downloadApp = downloadApp;
   document.addEventListener("click", (e) => { if (e.target.classList?.contains("modal-overlay")) { closeEspaceModal(); closePaymentModal(); closePlanModal(); } });
   document.querySelectorAll(".nav-links li").forEach(li => li.addEventListener("click", () => { const p = li.getAttribute("data-page"); if (p === "espace-client") openEspaceModal(); else if (p) renderPage(p); }));
-  renderPage("telechargement");
+  
+  // تغيير الصفحة الافتراضية من "telechargement" إلى "accueil"
+  renderPage("accueil");
 </script>
 </body>
 </html>
