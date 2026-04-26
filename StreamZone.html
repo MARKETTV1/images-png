@@ -12,155 +12,273 @@
     }
 
     body {
-      background: #0b0b0b;
+      background: linear-gradient(135deg, #1a3a5c 0%, #2a4a6e 50%, #e67e22 100%);
       font-family: 'Segoe UI', 'Poppins', system-ui, 'Inter', sans-serif;
-      color: #e8e6e1;
+      color: #f0f0f0;
       line-height: 1.4;
+      min-height: 100vh;
     }
 
-    /* ========== SCROLLBAR ========== */
     ::-webkit-scrollbar { width: 5px; }
-    ::-webkit-scrollbar-track { background: #1a1a1a; }
-    ::-webkit-scrollbar-thumb { background: #c9a03d; border-radius: 6px; }
+    ::-webkit-scrollbar-track { background: #1a3a5c; }
+    ::-webkit-scrollbar-thumb { background: #e67e22; border-radius: 6px; }
 
-    /* ========== HEADER + NAV (RESPONSIVE) ========== */
+    /* ========== HEADER + NAV avec animation de rétrécissement ========== */
     .top-nav {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
       padding: 15px 20px;
-      background: #0f0f0f;
-      border-bottom: 1px solid #2a2418;
+      background: rgba(26, 58, 92, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(230, 126, 34, 0.3);
       position: sticky;
       top: 0;
       z-index: 100;
       gap: 15px;
+      transition: all 0.3s ease;
     }
-    .logo-area { display: flex; align-items: center; gap: 10px; }
-    .logo-icon { font-size: 24px; background: #1e1b14; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 12px; color: #d4a373; border: 1px solid #2f2a1f; }
-    .logo-text { font-weight: 700; font-size: 1.3rem; background: linear-gradient(135deg, #e9d6b0, #c9a03d); -webkit-background-clip: text; background-clip: text; color: transparent; }
-    .logo-text span { color: #b8864b; }
-    .nav-links { display: flex; gap: 12px; flex-wrap: wrap; list-style: none; justify-content: center; }
-    .nav-links li { cursor: pointer; font-weight: 500; font-size: 0.8rem; transition: all 0.2s; padding: 6px 0; border-bottom: 2px solid transparent; color: #cccbc7; }
-    .nav-links li:hover { color: #d4a373; border-bottom-color: #c9a03d; }
-    .nav-links li.active-page { color: #e2bc7c; border-bottom-color: #d4a373; }
+    .top-nav.shrink {
+      padding: 8px 20px;
+    }
+    .top-nav.shrink .logo-icon {
+      width: 32px;
+      height: 32px;
+      font-size: 18px;
+    }
+    .top-nav.shrink .logo-text {
+      font-size: 1rem;
+    }
+    .top-nav.shrink .nav-links li {
+      font-size: 0.7rem;
+      padding: 4px 0;
+    }
+    .logo-area { display: flex; align-items: center; gap: 10px; transition: all 0.3s ease; }
+    .logo-icon { font-size: 24px; background: rgba(230, 126, 34, 0.2); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 12px; color: #e67e22; border: 1px solid #e67e22; transition: all 0.3s ease; }
+    .logo-text { font-weight: 700; font-size: 1.3rem; background: linear-gradient(135deg, #f5a623, #e67e22); -webkit-background-clip: text; background-clip: text; color: transparent; white-space: nowrap; transition: all 0.3s ease; }
+    .logo-text span { color: #e67e22; }
+    .nav-links { display: flex; gap: 12px; flex-wrap: wrap; list-style: none; justify-content: center; transition: all 0.3s ease; }
+    .nav-links li { cursor: pointer; font-weight: 500; font-size: 0.8rem; transition: all 0.3s ease; padding: 6px 0; border-bottom: 2px solid transparent; color: #ddd; white-space: nowrap; }
+    .nav-links li:hover { color: #e67e22; border-bottom-color: #e67e22; }
+    .nav-links li.active-page { color: #e67e22; border-bottom-color: #e67e22; }
+
+    /* ========== TICKERS (شريطان للأخبار ببطء شديد جداً) ========== */
+    .tickers-wrapper {
+      position: sticky;
+      top: 70px;
+      z-index: 99;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(230, 126, 34, 0.5);
+      width: 100%;
+      transition: top 0.3s ease;
+    }
+    .top-nav.shrink ~ .tickers-wrapper {
+      top: 55px;
+    }
+    .news-ticker {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 6px 20px;
+      overflow: hidden;
+      white-space: nowrap;
+      position: relative;
+      border-bottom: 1px solid rgba(230, 126, 34, 0.2);
+    }
+    .news-ticker:last-child {
+      border-bottom: none;
+    }
+    .ticker-left-to-right {
+      display: inline-block;
+      animation: scrollLeftToRight 180s linear infinite;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #f0f0f0;
+    }
+    .ticker-right-to-left {
+      display: inline-block;
+      animation: scrollRightToLeft 180s linear infinite;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #f0f0f0;
+    }
+    .ticker-content span {
+      display: inline-block;
+      margin-right: 35px;
+    }
+    .ticker-content i {
+      color: #e67e22;
+      margin-right: 8px;
+      font-style: normal;
+      font-weight: bold;
+    }
+    @keyframes scrollLeftToRight {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(0%); }
+    }
+    @keyframes scrollRightToLeft {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-100%); }
+    }
+    .news-ticker:hover .ticker-left-to-right,
+    .news-ticker:hover .ticker-right-to-left {
+      animation-play-state: paused;
+    }
 
     .page-container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0px 20px 50px;
+      padding: 0px 15px 50px;
       min-height: 70vh;
     }
 
-    /* ========== BANNER RESPONSIVE ========== */
+    /* ========== BANNER ========== */
     .hero-banner {
-      position: relative; width: 100%; border-radius: 24px; overflow: hidden;
-      margin-bottom: 40px; margin-top: 16px; background: #0e0e0c;
+      position: relative; width: 100%; border-radius: 20px; overflow: hidden;
+      margin-bottom: 35px; margin-top: 10px; background: rgba(26, 58, 92, 0.7);
+      backdrop-filter: blur(5px);
     }
-    .hero-banner img { width: 100%; min-height: 220px; object-fit: cover; display: block; }
+    .hero-banner img { width: 100%; min-height: 200px; object-fit: cover; display: block; opacity: 0.85; }
     .hero-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(0,0,0,0.4));
+      background: linear-gradient(135deg, rgba(26,58,92,0.7), rgba(230,126,34,0.3));
       display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
-      padding: 20px 25px;
+      padding: 18px 22px;
     }
-    .hero-overlay .pre-title { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 3px; color: #e2bc7c; background: rgba(0,0,0,0.5); padding: 3px 10px; border-radius: 30px; margin-bottom: 12px; }
-    .hero-overlay h1 { font-size: 1.8rem; font-weight: 800; color: white; text-shadow: 0 2px 8px black; margin-bottom: 12px; }
-    .hero-features { display: flex; flex-wrap: wrap; gap: 10px; margin: 10px 0; }
-    .hero-features span { background: rgba(0,0,0,0.55); backdrop-filter: blur(2px); padding: 4px 12px; border-radius: 40px; border-left: 2px solid #c9a03d; font-size: 0.7rem; }
-    .price-highlight { font-size: 1.3rem; font-weight: bold; color: #f5c542; background: rgba(0,0,0,0.6); display: inline-block; padding: 6px 16px; border-radius: 50px; margin: 8px 0 12px; }
-    .hero-btn { background: #c9a03d; border: none; padding: 10px 22px; font-size: 0.85rem; font-weight: bold; border-radius: 50px; color: #0b0b0b; cursor: pointer; transition: 0.2s; }
+    .hero-overlay .pre-title { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 3px; color: #e67e22; background: rgba(0,0,0,0.5); padding: 3px 10px; border-radius: 30px; margin-bottom: 8px; display: inline-block; }
+    .hero-overlay h1 { font-size: 1.6rem; font-weight: 800; color: white; text-shadow: 0 2px 8px black; margin-bottom: 8px; line-height: 1.2; }
+    .hero-features { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0; }
+    .hero-features span { background: rgba(0,0,0,0.6); backdrop-filter: blur(2px); padding: 4px 10px; border-radius: 30px; border-left: 2px solid #e67e22; font-size: 0.65rem; white-space: nowrap; color: white; }
+    .price-highlight { font-size: 1.2rem; font-weight: bold; color: #e67e22; background: rgba(0,0,0,0.6); display: inline-block; padding: 5px 14px; border-radius: 50px; margin: 6px 0 10px; }
+    .hero-btn { background: #e67e22; border: none; padding: 8px 18px; font-size: 0.8rem; font-weight: bold; border-radius: 50px; color: white; cursor: pointer; transition: 0.2s; }
+    .hero-btn:hover { background: #f39c12; transform: scale(1.02); }
 
     /* ========== APPS GRID ========== */
-    .apps-section, .payment-section { margin: 40px 0 25px; text-align: center; }
-    .section-title-custom { font-size: 1.4rem; margin-bottom: 20px; color: #e9dbbc; border-left: 4px solid #c9a03d; padding-left: 15px; display: inline-block; text-align: left; }
+    .apps-section, .payment-section { margin: 35px 0 20px; text-align: center; }
+    .section-title-custom { font-size: 1.3rem; margin-bottom: 18px; color: #e67e22; border-left: 4px solid #e67e22; padding-left: 12px; display: inline-block; text-align: left; background: rgba(0,0,0,0.3); padding: 8px 15px; border-radius: 50px; }
     .apps-grid, .payment-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-      gap: 15px; justify-items: center; align-items: center;
-      background: #0f0f0d; padding: 20px 18px; border-radius: 32px;
-      border: 1px solid #2a2418; margin-bottom: 20px;
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(95px, 1fr));
+      gap: 12px; justify-items: center; align-items: center;
+      background: rgba(42, 74, 110, 0.7);
+      backdrop-filter: blur(5px);
+      padding: 18px 15px; border-radius: 28px;
+      border: 1px solid rgba(230, 126, 34, 0.3);
+      margin-bottom: 20px;
     }
     .forfaits-horizontal {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 16px;
+      gap: 14px;
       margin: 25px 0 20px;
     }
     .forfait-card {
-      background: #141412;
-      border-radius: 24px;
-      padding: 16px 14px;
-      width: 170px;
+      background: rgba(42, 74, 110, 0.8);
+      backdrop-filter: blur(5px);
+      border-radius: 22px;
+      padding: 14px 12px;
+      width: 160px;
       text-align: center;
-      border: 1px solid #2a261c;
+      border: 1px solid rgba(230, 126, 34, 0.3);
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 8px;
       transition: all 0.25s ease;
     }
-    .forfait-card:hover { transform: translateY(-4px); border-color: #c9a03d; background: #1d1b15; }
-    .forfait-name { font-size: 1.2rem; font-weight: 700; color: #e9dbbc; }
-    .forfait-price { font-size: 1.5rem; font-weight: 800; color: #f5c542; background: #1f1d17; padding: 3px 12px; border-radius: 50px; display: inline-block; }
-    .forfait-price span { font-size: 0.7rem; }
-    .btn-forfait { background: #c9a03d; border: none; padding: 7px 14px; border-radius: 40px; font-weight: bold; font-size: 0.7rem; color: #0b0b0b; cursor: pointer; width: 100%; }
-    .whatsapp-btn { background: #25D366; border: none; padding: 7px 14px; border-radius: 40px; font-weight: bold; font-size: 0.7rem; color: white; cursor: pointer; width: 100%; text-decoration: none; display: inline-block; }
-    .app-icon-card, .payment-card { background: #121210; border-radius: 20px; padding: 12px 8px; width: 100%; text-align: center; border: 1px solid #28241b; display: flex; flex-direction: column; align-items: center; gap: 8px; transition: all 0.2s ease; }
-    .payment-card { background: #1a2a1a; border-color: #4a6b3f; cursor: default; }
-    .app-icon-card img, .payment-card img { width: 55px; height: 55px; object-fit: contain; background: #0a0a08; padding: 5px; border-radius: 12px; }
-    .app-icon-card span, .payment-card span { font-size: 0.7rem; font-weight: 500; color: #e2d5bc; }
-    .info-note { background: #1f1d17; border-radius: 24px; padding: 10px 15px; text-align: center; font-size: 0.7rem; color: #b6aa89; margin-top: 10px; }
+    .forfait-card:hover { transform: translateY(-4px); border-color: #e67e22; background: rgba(230, 126, 34, 0.2); }
+    .forfait-name { font-size: 1.1rem; font-weight: 700; color: #e67e22; }
+    .forfait-price { font-size: 1.4rem; font-weight: 800; color: #e67e22; background: rgba(0,0,0,0.4); padding: 3px 10px; border-radius: 50px; display: inline-block; }
+    .forfait-price span { font-size: 0.65rem; color: #ccc; }
+    .btn-forfait { background: #e67e22; border: none; padding: 6px 12px; border-radius: 40px; font-weight: bold; font-size: 0.7rem; color: white; cursor: pointer; width: 100%; }
+    .btn-forfait:hover { background: #f39c12; }
+    .whatsapp-btn { background: #25D366; border: none; padding: 6px 12px; border-radius: 40px; font-weight: bold; font-size: 0.7rem; color: white; cursor: pointer; width: 100%; text-decoration: none; display: inline-block; }
+    .app-icon-card, .payment-card { background: rgba(26, 58, 92, 0.6); border-radius: 18px; padding: 10px 6px; width: 100%; text-align: center; border: 1px solid rgba(230, 126, 34, 0.3); display: flex; flex-direction: column; align-items: center; gap: 6px; transition: all 0.2s ease; }
+    .payment-card { cursor: default; }
+    .app-icon-card img, .payment-card img { width: 50px; height: 50px; object-fit: contain; background: rgba(0,0,0,0.3); padding: 4px; border-radius: 10px; }
+    .app-icon-card span, .payment-card span { font-size: 0.65rem; font-weight: 500; color: #ddd; }
+    .info-note { background: rgba(0,0,0,0.4); border-radius: 20px; padding: 8px 12px; text-align: center; font-size: 0.65rem; color: #ddd; margin-top: 10px; }
 
     /* ========== PAGE TELECHARGEMENT ========== */
-    .downloads-container { display: flex; flex-direction: column; gap: 16px; margin: 20px auto; }
-    .download-item { background: #121210; border-radius: 24px; padding: 15px 18px; border: 1px solid #2a261c; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
-    .download-info h3 { font-size: 1rem; margin-bottom: 5px; }
-    .download-code { background: #1f1d17; padding: 3px 10px; border-radius: 30px; font-size: 0.65rem; color: #c9a03d; display: inline-block; }
-    .download-actions { display: flex; gap: 10px; }
-    .download-link-btn, .copy-code-btn { padding: 6px 14px; border-radius: 30px; font-size: 0.65rem; font-weight: bold; cursor: pointer; border: none; }
-    .download-link-btn { background: #c9a03d; color: #0b0b0b; }
-    .copy-code-btn { background: #25221a; border: 1px solid #3f3829; color: #ddd4c0; }
+    .downloads-container { display: flex; flex-direction: column; gap: 14px; margin: 20px auto; }
+    .download-item { background: rgba(42, 74, 110, 0.8); backdrop-filter: blur(5px); border-radius: 22px; padding: 12px 15px; border: 1px solid rgba(230, 126, 34, 0.3); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; }
+    .download-info h3 { font-size: 0.9rem; margin-bottom: 4px; color: #e67e22; }
+    .download-code { background: rgba(0,0,0,0.4); padding: 2px 8px; border-radius: 30px; font-size: 0.6rem; color: #e67e22; display: inline-block; }
+    .download-actions { display: flex; gap: 8px; }
+    .download-link-btn, .copy-code-btn { padding: 5px 12px; border-radius: 30px; font-size: 0.6rem; font-weight: bold; cursor: pointer; border: none; }
+    .download-link-btn { background: #e67e22; color: white; }
+    .copy-code-btn { background: rgba(0,0,0,0.5); border: 1px solid rgba(230, 126, 34, 0.5); color: #ddd; }
 
     /* ========== MODAL ========== */
-    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(5,5,3,0.96); backdrop-filter: blur(8px); z-index: 1000; justify-content: center; align-items: center; }
+    .modal-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.95);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
     .modal-overlay.active { display: flex; }
-    .modal-card { background: #171713; border-radius: 32px; padding: 22px; max-width: 95%; width: 500px; max-height: 85vh; overflow-y: auto; border: 1px solid #c9a03d; }
-    .modal-card h2 { font-size: 1.3rem; margin-bottom: 12px; border-left: 4px solid #c9a03d; padding-left: 14px; }
-    .modal-section h3 { font-size: 1rem; margin-bottom: 8px; }
-    .channel-list { display: flex; flex-wrap: wrap; gap: 6px; max-height: 250px; overflow-y: auto; }
-    .channel-tag { background: #25221a; padding: 4px 10px; border-radius: 30px; font-size: 0.65rem; }
-    .close-modal-btn { background: #c9a03d; border: none; padding: 8px 20px; border-radius: 40px; font-weight: bold; cursor: pointer; margin-top: 16px; }
-    .contact-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 20px; }
-    .contact-icon-btn { display: inline-flex; align-items: center; gap: 8px; background: #1e1c17; padding: 10px 20px; border-radius: 50px; text-decoration: none; color: #e2dccd; font-weight: 600; font-size: 0.75rem; border: 1px solid #3f3829; }
-    .contact-icon-btn img { width: 20px; height: 20px; filter: brightness(0) invert(1); }
-    .contact-form { background: #11110e; border-radius: 28px; padding: 22px; margin-bottom: 20px; }
-    .form-group input, .form-group textarea { width: 100%; background: #1e1c17; border: 1px solid #3d3627; padding: 10px; border-radius: 18px; color: #efe6d6; }
-    .btn-send { background: #c9a03d; border: none; padding: 10px; border-radius: 40px; font-weight: bold; cursor: pointer; width: 100%; }
-    .promos-slider-container { background: #0f0f0d; border-radius: 32px; padding: 20px; margin-bottom: 20px; }
-    .slider-image { width: 100%; max-height: 250px; object-fit: cover; border-radius: 24px; }
-    footer { background: #090907; border-top: 1px solid #292216; padding: 25px 15px; text-align: center; font-size: 0.7rem; color: #79755f; }
-    .page-hero.centered { text-align: center; margin-bottom: 15px; }
-    .page-hero.centered h1 { font-size: 1.6rem; }
-    .page-hero.centered p { font-size: 0.85rem; }
+    .modal-card {
+      background: #1a3a5c;
+      border-radius: 28px;
+      padding: 20px;
+      max-width: 95%;
+      width: 800px;
+      max-height: 85vh;
+      overflow-y: auto;
+      border: 1px solid #e67e22;
+    }
+    .modal-card h2 { font-size: 1.3rem; margin-bottom: 12px; border-left: 4px solid #e67e22; padding-left: 12px; color: #e67e22; }
+    .modal-section { margin-bottom: 20px; }
+    .modal-section h3 { font-size: 1rem; margin-bottom: 8px; color: #f5a623; border-bottom: 1px solid rgba(230,126,34,0.3); padding-bottom: 4px; }
+    .channel-list { display: flex; flex-wrap: wrap; gap: 6px; max-height: 250px; overflow-y: auto; padding: 5px; }
+    .channel-tag { background: rgba(0,0,0,0.5); padding: 4px 10px; border-radius: 30px; font-size: 0.7rem; color: #ddd; border: 1px solid rgba(230,126,34,0.3); white-space: nowrap; }
+    .close-modal-btn { background: #e67e22; border: none; padding: 8px 24px; border-radius: 40px; font-weight: bold; cursor: pointer; margin-top: 16px; font-size: 0.8rem; color: white; }
+    /* Style pour les options de test */
+    .test-options { display: flex; flex-direction: column; gap: 12px; margin: 20px 0; }
+    .test-option-btn { background: #2a4a6e; border: 1px solid #e67e22; padding: 12px 16px; border-radius: 60px; color: #e9dbbc; font-weight: bold; cursor: pointer; transition: all 0.2s; text-align: center; }
+    .test-option-btn:hover { background: #e67e22; color: #0b0b0b; transform: scale(1.02); }
+    .contact-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 18px; }
+    .contact-icon-btn { display: inline-flex; align-items: center; gap: 6px; background: rgba(42, 74, 110, 0.8); padding: 8px 16px; border-radius: 50px; text-decoration: none; color: #ddd; font-weight: 600; font-size: 0.7rem; border: 1px solid rgba(230, 126, 34, 0.3); }
+    .contact-icon-btn img { width: 18px; height: 18px; filter: brightness(0) invert(1); }
+    .contact-form { background: rgba(42, 74, 110, 0.8); border-radius: 24px; padding: 18px; margin-bottom: 18px; }
+    .form-group input, .form-group textarea { width: 100%; background: rgba(26, 58, 92, 0.8); border: 1px solid rgba(230, 126, 34, 0.3); padding: 8px; border-radius: 16px; color: #f0f0f0; font-size: 0.8rem; }
+    .btn-send { background: #e67e22; border: none; padding: 8px; border-radius: 40px; font-weight: bold; cursor: pointer; width: 100%; font-size: 0.8rem; color: white; }
+    .promos-slider-container { background: rgba(42, 74, 110, 0.8); border-radius: 28px; padding: 16px; margin-bottom: 18px; }
+    .slider-image { width: 100%; max-height: 200px; object-fit: cover; border-radius: 20px; }
+    footer { background: rgba(26, 58, 92, 0.9); border-top: 1px solid rgba(230, 126, 34, 0.3); padding: 20px 15px; text-align: center; font-size: 0.65rem; color: #ddd; }
+    .page-hero.centered { text-align: center; margin-bottom: 12px; }
+    .page-hero.centered h1 { font-size: 1.4rem; color: #e67e22; text-shadow: 0 0 10px rgba(0,0,0,0.5); }
+    .page-hero.centered p { font-size: 0.75rem; color: #ccc; }
 
     @media (min-width: 768px) {
       .top-nav { padding: 18px 40px; }
+      .top-nav.shrink { padding: 10px 40px; }
       .nav-links { gap: 28px; }
       .nav-links li { font-size: 1rem; }
+      .top-nav.shrink .nav-links li { font-size: 0.85rem; }
+      .hero-overlay { padding: 35px 50px; }
       .hero-overlay h1 { font-size: 2.8rem; }
-      .hero-overlay { padding: 40px 50px; }
-      .hero-features span { font-size: 0.85rem; padding: 5px 18px; }
-      .apps-grid, .payment-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 22px; padding: 32px 24px; }
-      .forfait-card { width: 210px; padding: 20px 18px; }
-      .section-title-custom { font-size: 1.9rem; }
+      .hero-features span { font-size: 0.85rem; padding: 5px 16px; white-space: nowrap; }
+      .price-highlight { font-size: 1.5rem; }
+      .hero-btn { padding: 12px 28px; font-size: 0.95rem; }
+      .apps-grid, .payment-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 20px; padding: 28px 22px; }
+      .forfait-card { width: 200px; padding: 18px 16px; }
+      .section-title-custom { font-size: 1.8rem; }
+      .app-icon-card img, .payment-card img { width: 65px; height: 65px; }
+      .page-hero.centered h1 { font-size: 2rem; }
+      .news-ticker { padding: 8px 20px; }
+      .ticker-left-to-right, .ticker-right-to-left { font-size: 0.85rem; animation-duration: 220s; }
+      .tickers-wrapper { top: 80px; }
+      .top-nav.shrink ~ .tickers-wrapper { top: 62px; }
     }
   </style>
 </head>
 <body>
 
-<div class="top-nav">
+<div class="top-nav" id="topNav">
   <div class="logo-area"><div class="logo-icon">📡</div><div class="logo-text">Stream<span>Zone</span></div></div>
   <ul class="nav-links">
     <li data-page="accueil">Accueil</li>
@@ -172,21 +290,190 @@
   </ul>
 </div>
 
+<!-- شريطان للأخبار -->
+<div class="tickers-wrapper" id="globalTickersWrapper">
+  <div class="news-ticker" id="ticker1">
+    <div id="newsTickerContent1" class="ticker-left-to-right ticker-content">📢 Chargement des actualités...</div>
+  </div>
+  <div class="news-ticker" id="ticker2">
+    <div id="newsTickerContent2" class="ticker-right-to-left ticker-content">🌍 Chargement des actualités internationales...</div>
+  </div>
+</div>
+
 <main id="main-app" class="page-container"></main>
 <footer><p>© 2025 StreamZone — Service IPTV haute stabilité</p><p>📍 Maroc | Support dédié</p></footer>
 
 <div id="paymentContactModal" class="modal-overlay">
   <div class="modal-card"><h2>💬 Contacter le support</h2><p>📦 Paiement & informations :</p>
     <div style="display:flex; flex-direction:column; gap:12px; margin:20px 0;">
-      <a href="https://wa.me/212670965351" target="_blank" style="background:#25221a; padding:12px; border-radius:60px; text-decoration:none; color:#e2dccd; text-align:center;">📱 WhatsApp +212 670 965 351</a>
-      <a href="https://www.facebook.com/streamzoneOF/" target="_blank" style="background:#25221a; padding:12px; border-radius:60px; text-decoration:none; color:#e2dccd; text-align:center;">📘 Facebook streamzoneOF</a>
-      <a href="https://t.me/KarimAbuRida" target="_blank" style="background:#25221a; padding:12px; border-radius:60px; text-decoration:none; color:#e2dccd; text-align:center;">✈️ Telegram @KarimAbuRida</a>
+      <a href="https://wa.me/212670965351" target="_blank" style="background:#2a4a6e; padding:10px; border-radius:60px; text-decoration:none; color:#ddd; text-align:center; font-size:0.8rem; border:1px solid #e67e22;">📱 WhatsApp +212 670 965 351</a>
+      <a href="https://www.facebook.com/streamzoneOF/" target="_blank" style="background:#2a4a6e; padding:10px; border-radius:60px; text-decoration:none; color:#ddd; text-align:center; font-size:0.8rem; border:1px solid #e67e22;">📘 Facebook streamzoneOF</a>
+      <a href="https://t.me/KarimAbuRida" target="_blank" style="background:#2a4a6e; padding:10px; border-radius:60px; text-decoration:none; color:#ddd; text-align:center; font-size:0.8rem; border:1px solid #e67e22;">✈️ Telegram @KarimAbuRida</a>
     </div>
     <button class="close-modal-btn" onclick="closePaymentModal()">Fermer</button>
   </div>
 </div>
 
 <script>
+  // ==================== تأثير تصغير شريط التنقل عند التمرير ====================
+  const topNav = document.getElementById('topNav');
+  let lastScrollY = window.scrollY;
+  
+  function handleNavbarScroll() {
+    const currentScrollY = window.scrollY;
+    if (currentScrollY > 50) {
+      topNav.classList.add('shrink');
+    } else {
+      topNav.classList.remove('shrink');
+    }
+    lastScrollY = currentScrollY;
+  }
+  
+  window.addEventListener('scroll', handleNavbarScroll);
+  
+  // ==================== محتوى الخطط الكامل ====================
+  const plansContent = {
+    BASIC: {
+      live: [
+        "EU| FRANCE CH", "AR| BEINSPORTS CH", "AR| SPORT ARABIC CH", "AR| SPORTS / SHAHID CH", "AS| STARZPLAY AD SPORTS CH",
+        "AR| AL KASS CH", "FIFA WOLRD CUP 2022 REPLAY CH", "AR| BEIN ENTERTAINMENT CH", "AR| OSN PREMIUM CH",
+        "AR| NETFLIX AR CH", "AR| GOBOX|ALMAJD CH", "AR| SHAHID VIP CH", "AR| MOROCCO CH", "AR| RADIO MOROCCO CH",
+        "AR| ALGERIA CH", "AR| ALGERIA RADIO CH", "AR| TUNISIA CH", "AR| ARABIC NEWS CH", "AR| QURAN CH",
+        "AR| ISLAM TV CH", "AR| MBC | ROTANA CH", "AR| DOCUMENTARY CH", "AR| KIDS ENTERTAINMENT CH", "AR| LEBANON CH",
+        "AR| JORDAN CH", "AR| EGYPTE CH", "AR| UAE CH", "AR| SYRIA CH", "AR| IRAQ CH", "AR| SAUDI ARABIA CH",
+        "AR| LIBYA CH", "AR| QATAR CH", "AR| PALESTINE CH", "AR| SUDAN CH", "AR| MAURITANIA CH", "AR| YEMEN CH",
+        "AR| OMAN CH", "AR| BAHRAIN CH", "AR| KUWAIT CH", "AR| CRISTIAN CH", "AR| SOMALIA CH", "AR| SPOTIFY CH",
+        "RE| RELAXING CH", "AR| MUSIC CH", "AF| SENEGAL CH", "AF| AFRICA CH", "AF| CANAL AFRIQUE CH", "AF| DSTV CH",
+        "AF| TANZANIA CH", "AF| CONGO CH", "EU| BELGIUM CH", "EU| SPAIN CH", "EU| ITALY CH", "EU| NEDERLAND CH",
+        "EU| GERMANY CH", "EU| UK CH", "EU| IRELAND CH", "EU| PORTUGAL CH", "EU| TURKEY", "EU| SWEDEN CH", "EU| NORWAY CH",
+        "EU| FINLAND CH", "EU| POLAND CH", "EU| ROMANIA CH", "EU| ALBANIA CH", "EU| RUSSIA", "EU| HEBREW CH", "EU| BULGARIA",
+        "EU| HUNGARY CH", "EU| LITHUANIA CH", "EU| SWITZERLAND CH", "EU| DENMARK CH", "EU| MALTA CH", "EU| AUTRICH CH",
+        "EU| GREECE CH", "EU| CYPRUS CH", "EU| LATVIA CH", "EU| ESTONIA CH", "EU| ICELAND CH", "EU| SLOVAKIA & Czechia CH",
+        "EU| CZECH CH", "EU| UKRAINE CH", "EU| GEORGIA CH", "EU| IRISH SPORTS CH", "EU| CANAL CARIBBEAN CH", "EU| VIAPLAY ALL CH",
+        "EU| EUROSPORT CH", "EU| F1 MOTO GP CH", "AM| CANADA CH", "AM| USA CH", "AM| HAITI DOMINICAN CH", "EU| ARMENIA CH",
+        "AU| AUSTRALIA CH", "EXYU| CH", "EXYU| CROATIA CH", "EXYU| SLOVENIA CH", "EXYU| MONTENEGRO CH", "EXYU| MACEDONIA CH",
+        "EXYU| SERBIA CH", "EXYU| BOSNA HERSEK CH", "EXYU| SPORT CH", "LAT| LATINO GENERAL CH", "LAT| BRAZIL CH", "LAT| ARGENTINA CH",
+        "LAT| CHILE CH", "LAT| PERU CH", "LAT| COLOMBIA CH", "LAT| ECUADOR CH", "LAT| VENEZUELA CH", "LAT| CUBA CH", "LAT| MEXICO CH",
+        "LAT| PANAMA CH", "LAT| EL SALVADOR CH", "LAT| PARAGUAY CH", "LAT| URUGUAY CH", "LAT| CARIBBEAN CH", "AS| IRAN CH",
+        "AS| KURDISTAN CH", "AS| INDIA CH", "AS| PAKISTAN CH", "AS| BANGLADESH", "AS| AFGHANISTAN CH", "AS| PHILIPINE CH",
+        "AS| THAILAND CH", "AS| VIETNAM CH", "AS| MALAYSIA CH", "AS| KOREA CH", "AS| JAPAN CH", "AS| TAIWAN CH", "AS| CHINA CH",
+        "AS| INDONESIA CH", "AS| SRI LANKA CH", "AS| ASIA ODIA CH", "AS| PUNJABI CH", "AS| TAMIL CH", "AS| ASIA SPORTS CH",
+        "AS| TELUGU CH", "AS| KANNADA CH", "AS| MALAYALAM CH", "AS| GUJARATI CH", "AS| MARATHI CH", "AS| ASIA ENGLISH CH", "AS| BENGALI CH"
+      ],
+      vodFilms: ["VOD|FRENCH", "VOD|ARABIC", "VOD|ENGLISH", "VOD|ITALY", "VOD|SPANISH", "VOD|NORDIC", "VOD|GERMANY", "VOD|NEDRLAND", "VOD|Turkish", "VOD|IRAN"],
+      vodSeries: ["SERIES|FRENCH", "SERIES|ARABIC", "SERIES|ENGLISH", "SERIES|SPANISH", "SERIES|AFRICANES", "SERIES|TURKISH", "SERIES|GERMANY", "SERIES|ITALIANA"]
+    },
+    STANDARD: {
+      live: ["RELAX 4K","FRANCE","BELGIUM","NETHERLAND","SWITZERLAND","UK","IRELAND","INDIA","PAKISTAN","TENNIS","GERMANY","AUSTRIA","TURKISH","ITALY","SPAIN","AUSTRALIA","SWEDEN","DENMARK","NORWAY","FINLAND","PORTUGAL","Poland","HEBREW","GREECE","KOSOVO/ALBANIA","RUSSIAN","UKRAINE","IRAN","AFGHANISTAN","AZERBAIJAN","KAZACHSTAN","ARMENIA","HUNGARY","BULGARIA","ROMANIA","GEORGIA","CZECH REPUBLIC","SERBIA","BOSNIA","CROATIA","MACEDONIA","SLOVENIA","LITHUANIA","VIETNAM","MALAYSIA","THAILAND","PHILIPINES","USA","CANADA","AFRICA","LATINO","CHILE","BRAZIL","RADIO (SOON)","✯عيدكم مبارك✯","✯☾رمضان يجمعنا☽✯","MBC","SYRIA","LEBANON","IRAQ","EGYPT","MOROCCO","NEWS","TOD SPORT PPV⚽","BEIN SPORTS 8K⚽","BEIN SPORTS SS⚽","BEIN SPORTS F⚽","BEIN SPORTS BE⚽","BEIN SPORTS ◉⚽","BEIN SPORTS UHD⚽","BEIN SPORTS NM⚽","BEIN SPORTS SA⚽","UEFA CHAMPIONS LEAGUE⚽","1001 ◉⚽","WATER SPORT⚽","STARZPLAY SPORT 4K⚽","STARZPLAY SPORT M⚽","STARZPLAY SPORT BE⚽","StarzPlay / AD SPORTS F ⚽","THMANYAH 8K⚽","THMANYAH BE⚽","THMANYAH ◉⚽","THMANYAH SA⚽","THMANYAH ᴺᴹ⚽","THMANYAH F⚽","SHAHID PPV ⚽","SHAHID PPV F ⚽","SHAHID BUNDESLIGA ᴮᴱ ⚽","SHAHID BUNDESLIGA ◉ ⚽","SHAHID BUNDESLIGA ᴺᴹ⚽","AL-KASS BE⚽","AL-KASS ◉⚽","DAZN MENA PPV","ALFAJER SPORT⚽","ALFAJER SPORT BE⚽","ALWAN SPORT F⚽","POST SPORT⚽","SHASHA SPORT ᴮᴱ ⚽","SHASHA SPORT F ⚽","ARABIC SPORT FTA⚽","STC EXCLUSIVE","MYHD F","KIDS","DOCUMENTARY","GOBX PLATINUM","GOBX BE","BEIN OD PLATINUM","BEIN ENTERTAINMENT NM","BEIN ENTERTAINMENT SS","BEIN ENTERTAINMENT 4K","BEIN ENTERTAINMENT F","BEIN ENTERTAINMENT ᴮᴱ","OSN PLATINUM","OSN BE","OSN F","ALRABIAA ᴺᴹ","ZINA NM","ONC NM","24/7 NM","STARZ PLAY RAW ▶","SHAHID VIP ▶","SHAHID CINEMA ▶","SHOOF DRAMA ▶","SHOOF COMEDY ▶","WEYYAK ▶","NETFLIX ▶","PRIME VIDEO ▶","ALWAN ENTERTAINMENT ▶","ON DEMAND ▶","BOX OFFICE ▶","WORLD OF COOKING ▶","CHEF OMAR","TOD ▶","ACTORS ▶","HBO ▶","Watch Box ▶","Power ▶","Hulu ▶","VIVO ▶","MAJESTIC ▶","ITUNES ▶","ANGHAMI ▶","MUSIC ▶","ROTANA & ART","AL-MAJD","AL-MAJD BE","QURAN KAREEM","MUSLIM TV","ISLAMIC","اناشيد اسلامية","CHRISTIAN","EMIRATES","SAUDI","KUWAIT","QATAR","OMAN","BAHRAIN","YEMEN","JORDAN","PALESTINE","TUNISIA","ALGERIA","LIBYA","SUDAN","ARABIC EXCLUSIVE LQ","SPORT EXCLUSIVE LQ","ARABIC +6H NA","KURDISH"],
+      vodFilms: ["MOVIES - TOP MOVIES BLURAY (MULTI-SUBS)","MOVIES - TOP KIDS BLURAY","MOVIES - NETFLIX","MOVIES - DISNEY+","MOVIES - APPLE+","MOVIES - FRANCE 4K 3840P","MOVIES - FRANCE","MOVIES - NETHERLANDS","MOVIES - PORTUGAL/BRAZIL","MOVIES - ENGLISH","MOVIES - GERMANY","MOVIES - ITALY","MOVIES - INDIA","MOVIES - PAKISTAN","MOVIES - SPAIN","MOVIES - TURKISH","MOVIES - IRAN","MOVIES - 4K افلام عربية","MOVIES - افلام مصرية","MOVIES - افلام مغربية","MOVIES - سلاسل الافلام","MOVIES - افلام اجنبية اكشن","MOVIES - MARVEL افلام مارفل","MOVIES - DC افلام دي سي"],
+      vodSeries: ["SERIES - NETFLIX","SERIES - PRIME VIDEO","SERIES - DISNEY+","SERIES - APPLE+","SERIES - ENGLISH","SERIES - TURKISH","SERIES - FRANCE","SERIES - INDIA","SERIES - ESPAÑA","SERIES - يعرض الان عربي","SERIES - يعرض الان تركي مترجم","SERIES - رمضانك سوري لبناني 2026","SERIES - رمضانك مصري 2026","SERIES - مسلسلات تركية مترجمة","SERIES - مسلسلات اجنبية 2026","SERIES - مسلسلات انمي مترجمة","SERIES - مسلسلات اطفال مدبلجة","SERIES - مسلسلات وثائقية مترجمة"]
+    },
+    PREMIUM: {
+      live: ["EU| FRANCE 4K","EU| CANAL CARIBBEAN 4K","EU| BELGIUM 4K","AR| BEINSPORTS 4K","AR| AL KASS 4K","AR| BEIN ENTERTAINMENT 4K","AS| STARZPLAY AD SPORTS 4K","AR| SPORTS / SHAHID 4K","AR| SPORT ARABIC 4K","AR| KIDS ENTERTAINMENT 4K","AR| OSN PREMIUM 4K","AR| NETFLIX AR 4K","AR| SHAHID VIP 4K","AR| GOBOX|ALMAJD 4K","AR| MOROCCO","AR| ALGERIA 4K","AR| TUNISIA 4K","AR| ARABIC NEWS 4K","AR| DOCUMENTARY 4K","AR| ISLAM TV 4K","AR| QURAN 4K","AR| MBC | ROTANA 4K","AR| LEBANON 4K","AR| EGYPTE 4K","AR| UAE 4K","AR| SAUDI ARABIA 4K","AR| IRAQ 4K","AR| SYRIA 4K","AM| United States PREMIUM","AM| CANADA EN PREMIUM","EU| UK 4k","EU| SPAIN 4K","EU| GERMANY 4K","EU| SWITZERLAND 4K","EU| PORTUGAL 4K","EU| ITALY PREMIUM","EU| NEDERLAND 4K","EU| TURKEY 4K","EU| GREECE 4K","EU| ARMENIA 4K","LAT| BRAZIL 4K","LAT| LATINO GENERAL 4K","AS| INDIA 4K","AS| JAPAN 4K","AU| AUSTRALIA 4K"],
+      vodFilms: ["VOD|NETFLIX","VOD|APPLE+","VOD|DISNEY+","VOD|DISCOVERY+","VOD|VIAPLAY","VOD|4k_MULTI","VOD|FR ULTRA ᵁᴴᴰ","VOD|FRENCH","VOD|ARABIC 4K","VOD|ENG ULTRA ᵁᴴᴰ","VOD|GERMANY","VOD|ITALY ULTRA ᵁᴴᴰ","VOD|NORDIC","VOD|Turkish","VOD|PORTUGAL","VOD|HINDI","VOD|BRAZIL","VOD|KURDISH"],
+      vodSeries: ["SERIES|MAX","SERIES|NETFLIX","SERIES|DISNEY+","SERIES|APPLE+","SERIES|4K_MULTI","SERIES|FRENCH","SERIES|ARABIC 4k","SERIES|ENGLISH","SERIES|TURKISH","SERIES|GERMANY","SERIES|ITALIANA 4K","SERIES|NEDRLAND","SERIES|HINDI"]
+    },
+    ULTIMATE: {
+      live: ["4K UHD 3840P⭐","RELAX UHD 3840P⭐","SPORT ON AIR ⁸ᴷ ⭐","UK ULTIMATE","GERMANY ULTIMATE","NETHERLAND ULTIMATE","ITALY ULTIMATE","FRANCE ULTIMATE","SPAIN ULTIMATE","SWEDEN ULTIMATE","DENMARK ULTIMATE","NORWAY ULTIMATE","FINLAND ULTIMATE","USA ULTIMATE","CANADA ULTIMATE","BRAZIL ULTIMATE","ARABIC UHD 3840P⭐","BEIN SPORT FULL⚽","TOD SPORT PPV ⚽","BEIN SPORT 8K⚽","UEFA CHAMPIONS LEAGUE⚽","STARZPLAY / AD SPORTS 4K ⚽","SHAHID PPV ⚽","DAZN MENA PPV ⭐","OSN PLATINUM","GOBX PLATINUM","MBC","EGYPT","MOROCCO","AL-MAJD","NETFLIX","PRIME VIDEO ▶⭐","HBO ⭐","VOD - TOP MOVIES DOLBY AUDIO 4K 3840p","VOD - NETFLIX ᴰᴼᴸᴮʸ ᴬᵁᴰᴵᴼ ⁴ᴷ ³⁸⁴⁰ᴾ⭐","VOD - AMAZON ⭐","VOD - DISNEY+ ⭐","VOD - HBO MAX 4K 3840P","VOD - APPLE+ ⭐","Watch Box ▶","HULU ▶"],
+      vodFilms: ["VOD - TOP MOVIES BLURAY (MULTI-SUBS)⭐","VOD - NETFLIX DOLBY AUDIO ⭐","VOD - DISNEY+ MOVIES MENA⭐","VOD - PARAMOUNT+⭐","VOD - MARVEL MOVIES⭐","VOD - 4K DOLBY AUDIO افلام عربية","VOD - أفلام عربية فائقة الوضوح","VOD - أفلام نجوم العرب","VOD - سلاسل الافلام","VOD - أفلام أجنبية 2027","VOD - JAMES BOND 007","VOD - أفلام هندية 2027","VOD - أفلام ألمانيه 2026","VOD - افلام اسلامية","VOD - UFC ARABIA"],
+      vodSeries: ["VOD - NETFLIX ⭐","VOD - DISNEY+ SERIES MENA⭐","VOD - HBO MAX","VOD - OSN+ SERIES 4K 3840P⭐","VOD - 4K DOLBY AUDIO مسلسلات عربية","VOD - مسلسلات شاهد فائقة الوضوح","VOD - رمضانك فائق الوضوح","VOD - ⭐مسلسلات شاهد الأصلية","VOD - مسلسلات أجنبيه فائقة الوضوح","VOD - مسلسلات تركية مترجم","VOD - مسلسلات انمي فائقة الوضوح","VOD - مسرحيات","VOD - مصارعة حرة"]
+    }
+  };
+
+  // عرض المحتوى العادي لغير TEST
+  function showRegularPlanModal(planName) {
+    const data = plansContent[planName];
+    if (!data) return;
+    const liveList = data.live.map(ch => `<span class="channel-tag">${ch}</span>`).join('');
+    const filmsList = data.vodFilms.map(f => `<span class="channel-tag">${f}</span>`).join('');
+    const seriesList = data.vodSeries.map(s => `<span class="channel-tag">${s}</span>`).join('');
+    const modalHTML = `
+      <div class="modal-card">
+        <h2>📺 ${planName} — Contenu complet</h2>
+        <div class="modal-section"><h3>📡 LIVE TV (${data.live.length} chaînes)</h3><div class="channel-list">${liveList}</div></div>
+        <div class="modal-section"><h3>🎬 VOD FILMS (${data.vodFilms.length})</h3><div class="channel-list">${filmsList}</div></div>
+        <div class="modal-section"><h3>📺 VOD SERIES (${data.vodSeries.length})</h3><div class="channel-list">${seriesList}</div></div>
+        <div style="text-align:center; margin-top:20px;">
+          <a href="https://wa.me/212670965351?text=Bonjour%2C%20je%20suis%20intéressé%20par%20le%20forfait%20${planName}" target="_blank" style="background:#25D366; display:inline-block; padding:8px 20px; border-radius:60px; color:white; text-decoration:none; font-weight:bold; font-size:0.75rem;">📲 Contacter WhatsApp pour souscrire</a>
+          <button class="close-modal-btn" onclick="closePlanModal()" style="margin-left:10px;">Fermer</button>
+        </div>
+      </div>`;
+    showModal(modalHTML);
+  }
+
+  // عرض خيارات TEST
+  function showTestOptionsModal() {
+    const modalHTML = `
+      <div class="modal-card">
+        <h2>🧪 TEST 24H — Choisissez votre version</h2>
+        <p style="margin-bottom: 16px; color: #ddd4c0;">Sélectionnez le type de test que vous souhaitez essayer :</p>
+        <div class="test-options">
+          <div class="test-option-btn" data-test-type="TEST BASIC">🔹 TEST BASIC (contenu BASIC 24h)</div>
+          <div class="test-option-btn" data-test-type="TEST STANDARD">🔸 TEST STANDARD (contenu STANDARD 24h)</div>
+          <div class="test-option-btn" data-test-type="TEST PREMIUM">🔹 TEST PREMIUM (contenu PREMIUM 24h)</div>
+          <div class="test-option-btn" data-test-type="TEST ULTIMATE">🔸 TEST ULTIMATE (contenu ULTIMATE 24h)</div>
+        </div>
+        <div style="text-align: center; margin-top: 20px;">
+          <button class="close-modal-btn" onclick="closePlanModal()">Fermer</button>
+        </div>
+      </div>`;
+    const modalOverlay = showModal(modalHTML);
+    setTimeout(() => {
+      document.querySelectorAll('.test-option-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const testType = btn.getAttribute('data-test-type');
+          const whatsappUrl = `https://wa.me/212670965351?text=Bonjour%2C%20je%20souhaite%20faire%20le%20${testType}%2024h%20pour%20tester%20vos%20services.`;
+          window.open(whatsappUrl, '_blank');
+          closePlanModal();
+        });
+      });
+    }, 50);
+  }
+
+  function showModal(htmlContent) {
+    let modalOverlay = document.getElementById("planModalOverlay");
+    if (!modalOverlay) {
+      modalOverlay = document.createElement('div');
+      modalOverlay.id = "planModalOverlay";
+      modalOverlay.className = "modal-overlay";
+      document.body.appendChild(modalOverlay);
+    }
+    modalOverlay.innerHTML = htmlContent;
+    modalOverlay.classList.add("active");
+    modalOverlay.onclick = (e) => { if (e.target === modalOverlay) closePlanModal(); };
+    return modalOverlay;
+  }
+  window.closePlanModal = () => { const el = document.getElementById("planModalOverlay"); if (el) el.classList.remove("active"); };
+
+  // جلب الأخبار من الرابطين
+  async function fetchNewsAndUpdateTickers() {
+    const url1 = 'https://raw.githubusercontent.com/MARKETTV1/images-png/refs/heads/main/NEWS/news%26promos';
+    const url2 = 'https://raw.githubusercontent.com/MARKETTV1/images-png/refs/heads/main/NEWS/news%26promos1';
+    try {
+      const response1 = await fetch(url1);
+      if (response1.ok) {
+        const text1 = await response1.text();
+        const clean1 = text1.replace(/\n/g, ' • ').replace(/\s+/g, ' ').trim();
+        updateTicker('newsTickerContent1', clean1 || "📢 Bienvenue sur StreamZone");
+      } else { updateTicker('newsTickerContent1', "📢 Bienvenue sur StreamZone"); }
+    } catch(e) { updateTicker('newsTickerContent1', "📢 Bienvenue sur StreamZone"); }
+    try {
+      const response2 = await fetch(url2);
+      if (response2.ok) {
+        const text2 = await response2.text();
+        const clean2 = text2.replace(/\n/g, ' • ').replace(/\s+/g, ' ').trim();
+        updateTicker('newsTickerContent2', clean2 || "🌍 Actualités internationales");
+      } else { updateTicker('newsTickerContent2', "🌍 Restez connectés avec StreamZone"); }
+    } catch(e) { updateTicker('newsTickerContent2', "🌍 Restez connectés avec StreamZone"); }
+  }
+
+  function updateTicker(containerId, text) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    container.innerHTML = `<span><i>📢</i> ${text}</span><span><i>📢</i> ${text}</span><span><i>📢</i> ${text}</span>`;
+  }
+
   const downloadsList = [
     { name: "IBO Player", code: "1171959", url: "https://ibodesk.com/iboupdate.apk" },
     { name: "BOB Player", code: "815778", url: "https://ibodesk.com/bob.apk" },
@@ -198,25 +485,6 @@
 
   function copyCode(code) { navigator.clipboard.writeText(code); alert(`Code ${code} copié !`); }
   function downloadApp(url) { window.open(url, '_blank'); }
-
-  const plansContent = {
-    TEST: { live: ["📡 Test 24h - Découverte", "🎬 500 chaînes", "📞 Support 24h"], vodFilms: ["Films test"], vodSeries: ["Séries échantillon"] },
-    BASIC: { live: ["Chaînes BASIC", "France, Belgique, Suisse, Canada", "Maghreb, Moyen-Orient"], vodFilms: ["Films BASIC"], vodSeries: ["Séries BASIC"] },
-    STANDARD: { live: ["Chaînes STANDARD", "+15 000 chaînes", "4K Ultra HD", "Sport, News"], vodFilms: ["Films STANDARD 4K"], vodSeries: ["Séries STANDARD"] },
-    PREMIUM: { live: ["Chaînes PREMIUM 4K", "BEIN SPORTS 4K", "OSN PREMIUM 4K", "Netflix AR 4K"], vodFilms: ["VOD PREMIUM 4K"], vodSeries: ["Séries PREMIUM 4K"] },
-    ULTIMATE: { live: ["Ultimate 4K UHD", "Tous les sports PPV", "BEIN SPORT FULL", "DAZN MENA"], vodFilms: ["Ultimate 4K Dolby Audio"], vodSeries: ["Ultimate Series 4K"] }
-  };
-
-  function showPlanModal(planName) {
-    const data = plansContent[planName];
-    if (!data) return;
-    const modalHTML = `<div class="modal-card"><h2>📺 ${planName}</h2><div class="modal-section"><h3>📡 LIVE TV</h3><div class="channel-list">${data.live.map(ch => `<span class="channel-tag">${ch}</span>`).join('')}</div></div><div class="modal-section"><h3>🎬 VOD FILMS</h3><div class="channel-list">${data.vodFilms.map(f => `<span class="channel-tag">${f}</span>`).join('')}</div></div><div class="modal-section"><h3>📺 VOD SERIES</h3><div class="channel-list">${data.vodSeries.map(s => `<span class="channel-tag">${s}</span>`).join('')}</div></div><div style="text-align:center; margin-top:20px;"><a href="https://wa.me/212670965351?text=Bonjour%2C%20je%20suis%20intéressé%20par%20le%20forfait%20${planName}" target="_blank" style="background:#25D366; display:inline-block; padding:10px 22px; border-radius:60px; color:white; text-decoration:none; font-weight:bold; font-size:0.8rem;">📲 Contacter WhatsApp</a><button class="close-modal-btn" onclick="closePlanModal()" style="margin-left:10px;">Fermer</button></div></div>`;
-    let modalOverlay = document.getElementById("planModalOverlay");
-    if (!modalOverlay) { modalOverlay = document.createElement('div'); modalOverlay.id = "planModalOverlay"; modalOverlay.className = "modal-overlay"; document.body.appendChild(modalOverlay); }
-    modalOverlay.innerHTML = modalHTML; modalOverlay.classList.add("active");
-    modalOverlay.onclick = (e) => { if (e.target === modalOverlay) closePlanModal(); };
-  }
-  window.closePlanModal = () => { const el = document.getElementById("planModalOverlay"); if (el) el.classList.remove("active"); };
 
   const appsList = [
     { name: "IBO PLAYER", icon: "https://iboplayer.com/assets/ibo-player-tZ0LjXtY.webp" },
@@ -245,17 +513,21 @@
     { name: "Sendwave", icon: "https://raw.githubusercontent.com/MARKETTV1/images-png/refs/heads/main/images/sendwave.png" },
     { name: "CashPlus", icon: "https://raw.githubusercontent.com/MARKETTV1/images-png/refs/heads/main/images/cashplus.png" }
   ];
-  const promoImages = ["https://placehold.co/800x400/2a2418/c9a03d?text=Promo+1", "https://placehold.co/800x400/2a2418/c9a03d?text=Promo+2", "https://placehold.co/800x400/2a2418/c9a03d?text=Promo+3"];
+  const promoImages = ["https://placehold.co/800x400/1a3a5c/e67e22?text=Promo+1", "https://placehold.co/800x400/1a3a5c/e67e22?text=Promo+2", "https://placehold.co/800x400/1a3a5c/e67e22?text=Promo+3"];
   let sliderInterval, currentImageIndex = 0;
   function startSlider() { if (sliderInterval) clearInterval(sliderInterval); sliderInterval = setInterval(() => { currentImageIndex = (currentImageIndex + 1) % promoImages.length; const img = document.getElementById("promosSliderImg"); if (img) img.src = promoImages[currentImageIndex]; }, 2000); }
   function stopSlider() { if (sliderInterval) clearInterval(sliderInterval); }
   async function sendEmail(formData) { const form = new FormData(); form.append("name", formData.name); form.append("email", formData.email); form.append("message", formData.message); form.append("_subject", "StreamZone Contact"); form.append("_template", "table"); try { const res = await fetch("https://formsubmit.co/ajax/karimakon08@gmail.com", { method: "POST", body: form }); return res.ok; } catch(e) { return false; } }
 
   const pagesData = {
-    accueil: { title: "Forfaits IPTV nouvelle génération", desc: "Qualité premium.", content: `<div class="hero-banner"><img src="https://raw.githubusercontent.com/MARKETTV1/images-png/refs/heads/main/acceuil.jpg" onerror="this.src='https://placehold.co/800x350/1f1b12/c9a03d?text=StreamZone'"><div class="hero-overlay"><div class="pre-title">📡 Forfait IPTV/OTT</div><h1>StreamZone Premium</h1><div class="hero-features"><span>✨ Serveur très stable</span><span>🔄 MàJ quotidiennes</span><span>📆 Service 7j/7</span><span>📺 SD/HD/FHD/4K</span><span>🌍 +200 pays</span></div><div class="price-highlight">💰 À partir de 15€</div><button class="hero-btn" id="heroForfaitsBtn">📦 Découvrir Nos Forfaits</button></div></div><div class="apps-section"><div style="text-align:center;"><h2 class="section-title-custom">📱 Applications IPTV compatibles</h2></div><div class="apps-grid" id="dynamicAppsGrid"></div></div><div class="payment-section"><div style="text-align:center;"><h2 class="section-title-custom">💳 Moyens de paiement</h2></div><div class="payment-grid" id="paymentMethodsGrid"></div><div class="info-note">Moyens de paiement acceptés — Contactez-nous</div></div>` },
-    contact: { title: "📞 Contact & Assistance", desc: "Joignez-nous", content: `<div class="contact-form"><h3 style="margin-bottom:20px; text-align:center;">💬 Formulaire</h3><form id="contactForm"><div class="form-group"><label>Nom</label><input type="text" id="contactName" required></div><div class="form-group"><label>Email</label><input type="email" id="contactEmail" required></div><div class="form-group"><label>Message</label><textarea rows="4" id="contactMsg" required></textarea></div><button type="submit" class="btn-send">📨 Envoyer</button></form></div><div class="contact-buttons"><a href="https://wa.me/212670965351" class="contact-icon-btn"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png"> WhatsApp</a><a href="https://t.me/KarimAbuRida" class="contact-icon-btn"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png"> Telegram</a><a href="https://www.facebook.com/streamzoneOF/" class="contact-icon-btn"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png"> Facebook</a></div></div>` },
-    telechargement: { title: "📥 Téléchargements", desc: "Applications & lecteurs IPTV", content: `<div class="downloads-container" id="downloadsContainer"></div><div class="info-note">💡 Code Downloader pour Firestick/Android TV</div>` },
-    forfaits: { title: "🎁 Nos Forfaits", desc: "Choisissez la formule adaptée", content: `<div class="forfaits-horizontal" id="forfaitsContainer"></div><div class="info-note">⚡ Cliquez sur "Voir détails" pour afficher le contenu complet.</div>` },
+    accueil: { title: "Forfaits IPTV nouvelle génération", desc: "Qualité premium, streaming sans faille", content: `
+      <div class="hero-banner"><img src="https://raw.githubusercontent.com/MARKETTV1/images-png/refs/heads/main/acceuil.jpg" onerror="this.src='https://placehold.co/800x350/1a3a5c/e67e22?text=StreamZone'"><div class="hero-overlay"><div class="pre-title">📡 Forfait IPTV/OTT</div><h1>StreamZone Premium</h1><div class="hero-features"><span>✨ Serveur très stable sans coupure</span><span>🔄 Mises à jour quotidiennes</span><span>📆 Service 7j/7</span><span>📺 SD / HD / FHD / 4K</span><span>🌍 +200 pays & régions</span></div><div class="price-highlight">💰 À partir de 15€</div><button class="hero-btn" id="heroForfaitsBtn">📦 Découvrir Nos Forfaits</button></div></div>
+      <div class="apps-section"><div style="text-align:center;"><h2 class="section-title-custom">📱 Applications IPTV compatibles</h2></div><div class="apps-grid" id="dynamicAppsGrid"></div></div>
+      <div class="payment-section"><div style="text-align:center;"><h2 class="section-title-custom">💳 Moyens de paiement</h2></div><div class="payment-grid" id="paymentMethodsGrid"></div><div class="info-note">Moyens de paiement acceptés — Contactez-nous</div></div>
+    ` },
+    contact: { title: "📞 Contact & Assistance", desc: "Joignez-nous via formulaire ou réseaux", content: `<div class="contact-form"><h3 style="margin-bottom:16px; text-align:center;">💬 Formulaire</h3><form id="contactForm"><div class="form-group"><label>Nom</label><input type="text" id="contactName" required></div><div class="form-group"><label>Email</label><input type="email" id="contactEmail" required></div><div class="form-group"><label>Message</label><textarea rows="3" id="contactMsg" required></textarea></div><button type="submit" class="btn-send">📨 Envoyer</button></form></div><div class="contact-buttons"><a href="https://wa.me/212670965351" class="contact-icon-btn"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png"> WhatsApp</a><a href="https://t.me/KarimAbuRida" class="contact-icon-btn"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png"> Telegram</a><a href="https://www.facebook.com/streamzoneOF/" class="contact-icon-btn"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png"> Facebook</a></div></div>` },
+    telechargement: { title: "📥 Téléchargements", desc: "Applications & lecteurs IPTV", content: `<div class="downloads-container" id="downloadsContainer"></div><div class="info-note">💡 Code Downloader pour Firestick / Android TV</div>` },
+    forfaits: { title: "🎁 Nos Forfaits", desc: "Choisissez la formule adaptée", content: `<div class="forfaits-horizontal" id="forfaitsContainer"></div><div class="info-note">⚡ Cliquez sur "Voir détails" pour afficher le contenu complet du plan (chaînes, VOD).</div>` },
     promos: { title: "🎁 Promos & Offres", desc: "Réductions limitées", content: `<div class="promos-slider-container"><img id="promosSliderImg" class="slider-image" src="${promoImages[0]}"></div><div class="info-note">⭐ Contactez-nous pour profiter des offres</div>` }
   };
 
@@ -268,20 +540,39 @@
     document.querySelectorAll(".nav-links li").forEach(li => { li.classList.remove("active-page"); if (li.getAttribute("data-page") === pageId) li.classList.add("active-page"); });
     
     if (pageId === "accueil") {
-      document.getElementById("dynamicAppsGrid").innerHTML = appsList.map(app => `<div class="app-icon-card" onclick="alert('🔗 ${app.name} : disponible sur store officiel.')"><img src="${app.icon}" onerror="this.src='https://placehold.co/60x60/2c281e/c9a03d'"><span>${app.name}</span></div>`).join('');
-      document.getElementById("paymentMethodsGrid").innerHTML = paymentMethods.map(m => `<div class="payment-card"><img src="${m.icon}" onerror="this.src='https://placehold.co/60x60/2c281e/c9a03d'"><span>${m.name}</span></div>`).join('');
+      document.getElementById("dynamicAppsGrid").innerHTML = appsList.map(app => `<div class="app-icon-card" onclick="alert('🔗 ${app.name} : disponible sur store officiel.')"><img src="${app.icon}" onerror="this.src='https://placehold.co/50x50/1a3a5c/e67e22'"><span>${app.name}</span></div>`).join('');
+      document.getElementById("paymentMethodsGrid").innerHTML = paymentMethods.map(m => `<div class="payment-card"><img src="${m.icon}" onerror="this.src='https://placehold.co/50x50/1a3a5c/e67e22'"><span>${m.name}</span></div>`).join('');
       document.getElementById("heroForfaitsBtn")?.addEventListener("click", () => renderPage("forfaits"));
     }
     if (pageId === "forfaits") {
       const forfaitsList = [
-        { name: "TEST", price: 2, duration: "24h" }, { name: "BASIC", price: 15, duration: "1 an" },
-        { name: "STANDARD", price: 30, duration: "1 an" }, { name: "PREMIUM", price: 40, duration: "1 an" },
+        { name: "TEST", price: 2, duration: "24h" },
+        { name: "BASIC", price: 15, duration: "1 an" },
+        { name: "STANDARD", price: 30, duration: "1 an" },
+        { name: "PREMIUM", price: 40, duration: "1 an" },
         { name: "ULTIMATE", price: 50, duration: "1 an" }
       ];
       const container = document.getElementById("forfaitsContainer");
       if (container) {
-        container.innerHTML = forfaitsList.map(f => `<div class="forfait-card"><div class="forfait-name">${f.name}</div><div class="forfait-price">${f.price}€ <span>/${f.duration}</span></div><button class="btn-forfait" data-plan="${f.name}">📋 Voir détails</button><a href="https://wa.me/212670965351?text=Bonjour%2C%20je%20suis%20intéressé%20par%20le%20forfait%20${f.name}%20à%20${f.price}€" target="_blank" class="whatsapp-btn">📲 WhatsApp</a></div>`).join('');
-        document.querySelectorAll(".btn-forfait").forEach(btn => { btn.addEventListener("click", (e) => { e.stopPropagation(); const plan = btn.getAttribute("data-plan"); if (plan) showPlanModal(plan); }); });
+        container.innerHTML = forfaitsList.map(f => `
+          <div class="forfait-card">
+            <div class="forfait-name">${f.name}</div>
+            <div class="forfait-price">${f.price}€ <span>/${f.duration}</span></div>
+            <button class="btn-forfait" data-plan="${f.name}">📋 Voir détails</button>
+            <a href="https://wa.me/212670965351?text=Bonjour%2C%20je%20suis%20intéressé%20par%20le%20forfait%20${f.name}%20à%20${f.price}€" target="_blank" class="whatsapp-btn">📲 WhatsApp</a>
+          </div>
+        `).join('');
+        document.querySelectorAll(".btn-forfait").forEach(btn => {
+          btn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            const plan = btn.getAttribute("data-plan");
+            if (plan === "TEST") {
+              showTestOptionsModal();
+            } else if (plan && plansContent[plan]) {
+              showRegularPlanModal(plan);
+            }
+          });
+        });
       }
     }
     if (pageId === "telechargement") {
@@ -297,6 +588,8 @@
   window.copyCode = copyCode; window.downloadApp = downloadApp;
   document.addEventListener("click", (e) => { if (e.target.classList?.contains("modal-overlay")) { closeEspaceModal(); closePaymentModal(); closePlanModal(); } });
   document.querySelectorAll(".nav-links li").forEach(li => li.addEventListener("click", () => { const p = li.getAttribute("data-page"); if (p === "espace-client") openEspaceModal(); else if (p) renderPage(p); }));
+  
+  fetchNewsAndUpdateTickers();
   renderPage("accueil");
 </script>
 </body>
