@@ -11,28 +11,29 @@
       box-sizing: border-box;
     }
 
+    /* PALETTE DE COULEURS EXTRAITE DE ATLAS */
     body {
-      background: linear-gradient(135deg, #1a3a5c 0%, #2a4a6e 50%, #e67e22 100%);
+      background: #0a0a0a; /* Fond noir profond */
       font-family: 'Segoe UI', 'Poppins', system-ui, 'Inter', sans-serif;
-      color: #f0f0f0;
+      color: #ffffff;
       line-height: 1.4;
       min-height: 100vh;
     }
 
     ::-webkit-scrollbar { width: 5px; }
-    ::-webkit-scrollbar-track { background: #1a3a5c; }
-    ::-webkit-scrollbar-thumb { background: #e67e22; border-radius: 6px; }
+    ::-webkit-scrollbar-track { background: #1a1a1a; }
+    ::-webkit-scrollbar-thumb { background: #e63946; border-radius: 6px; }
 
-    /* ========== HEADER + NAV avec animation de rétrécissement ========== */
+    /* ========== HEADER + NAV ========== */
     .top-nav {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
       padding: 15px 20px;
-      background: rgba(26, 58, 92, 0.95);
+      background: rgba(10, 10, 10, 0.95);
       backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(230, 126, 34, 0.3);
+      border-bottom: 1px solid rgba(230, 57, 70, 0.3);
       position: sticky;
       top: 0;
       z-index: 100;
@@ -55,22 +56,22 @@
       padding: 4px 0;
     }
     .logo-area { display: flex; align-items: center; gap: 10px; transition: all 0.3s ease; }
-    .logo-icon { font-size: 24px; background: rgba(230, 126, 34, 0.2); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 12px; color: #e67e22; border: 1px solid #e67e22; transition: all 0.3s ease; }
-    .logo-text { font-weight: 700; font-size: 1.3rem; background: linear-gradient(135deg, #f5a623, #e67e22); -webkit-background-clip: text; background-clip: text; color: transparent; white-space: nowrap; transition: all 0.3s ease; }
-    .logo-text span { color: #e67e22; }
+    .logo-icon { font-size: 24px; background: rgba(230, 57, 70, 0.15); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 12px; color: #e63946; border: 1px solid #e63946; transition: all 0.3s ease; }
+    .logo-text { font-weight: 700; font-size: 1.3rem; background: linear-gradient(135deg, #ffffff, #e63946); -webkit-background-clip: text; background-clip: text; color: transparent; white-space: nowrap; transition: all 0.3s ease; }
+    .logo-text span { color: #e63946; }
     .nav-links { display: flex; gap: 12px; flex-wrap: wrap; list-style: none; justify-content: center; transition: all 0.3s ease; }
-    .nav-links li { cursor: pointer; font-weight: 500; font-size: 0.8rem; transition: all 0.3s ease; padding: 6px 0; border-bottom: 2px solid transparent; color: #ddd; white-space: nowrap; }
-    .nav-links li:hover { color: #e67e22; border-bottom-color: #e67e22; }
-    .nav-links li.active-page { color: #e67e22; border-bottom-color: #e67e22; }
+    .nav-links li { cursor: pointer; font-weight: 500; font-size: 0.8rem; transition: all 0.3s ease; padding: 6px 0; border-bottom: 2px solid transparent; color: #cccccc; white-space: nowrap; }
+    .nav-links li:hover { color: #e63946; border-bottom-color: #e63946; }
+    .nav-links li.active-page { color: #e63946; border-bottom-color: #e63946; }
 
-    /* ========== TICKERS (شريطان للأخبار ببطء شديد جداً) ========== */
+    /* ========== TICKERS ========== */
     .tickers-wrapper {
       position: sticky;
       top: 70px;
       z-index: 99;
       background: rgba(0, 0, 0, 0.85);
       backdrop-filter: blur(8px);
-      border-bottom: 1px solid rgba(230, 126, 34, 0.5);
+      border-bottom: 1px solid rgba(230, 57, 70, 0.3);
       width: 100%;
       transition: top 0.3s ease;
     }
@@ -84,7 +85,7 @@
       overflow: hidden;
       white-space: nowrap;
       position: relative;
-      border-bottom: 1px solid rgba(230, 126, 34, 0.2);
+      border-bottom: 1px solid rgba(230, 57, 70, 0.15);
     }
     .news-ticker:last-child {
       border-bottom: none;
@@ -94,21 +95,21 @@
       animation: scrollLeftToRight 180s linear infinite;
       font-size: 0.75rem;
       font-weight: 500;
-      color: #f0f0f0;
+      color: #dddddd;
     }
     .ticker-right-to-left {
       display: inline-block;
       animation: scrollRightToLeft 180s linear infinite;
       font-size: 0.75rem;
       font-weight: 500;
-      color: #f0f0f0;
+      color: #dddddd;
     }
     .ticker-content span {
       display: inline-block;
       margin-right: 35px;
     }
     .ticker-content i {
-      color: #e67e22;
+      color: #e63946;
       margin-right: 8px;
       font-style: normal;
       font-weight: bold;
@@ -136,34 +137,32 @@
     /* ========== BANNER ========== */
     .hero-banner {
       position: relative; width: 100%; border-radius: 20px; overflow: hidden;
-      margin-bottom: 35px; margin-top: 10px; background: rgba(26, 58, 92, 0.7);
-      backdrop-filter: blur(5px);
+      margin-bottom: 35px; margin-top: 10px; background: #111111;
     }
-    .hero-banner img { width: 100%; min-height: 200px; object-fit: cover; display: block; opacity: 0.85; }
+    .hero-banner img { width: 100%; min-height: 200px; object-fit: cover; display: block; opacity: 0.9; }
     .hero-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(135deg, rgba(26,58,92,0.7), rgba(230,126,34,0.3));
+      background: linear-gradient(135deg, rgba(0,0,0,0.75), rgba(230,57,70,0.2));
       display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
       padding: 18px 22px;
     }
-    .hero-overlay .pre-title { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 3px; color: #e67e22; background: rgba(0,0,0,0.5); padding: 3px 10px; border-radius: 30px; margin-bottom: 8px; display: inline-block; }
+    .hero-overlay .pre-title { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 3px; color: #e63946; background: rgba(0,0,0,0.6); padding: 3px 10px; border-radius: 30px; margin-bottom: 8px; display: inline-block; }
     .hero-overlay h1 { font-size: 1.6rem; font-weight: 800; color: white; text-shadow: 0 2px 8px black; margin-bottom: 8px; line-height: 1.2; }
     .hero-features { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0; }
-    .hero-features span { background: rgba(0,0,0,0.6); backdrop-filter: blur(2px); padding: 4px 10px; border-radius: 30px; border-left: 2px solid #e67e22; font-size: 0.65rem; white-space: nowrap; color: white; }
-    .price-highlight { font-size: 1.2rem; font-weight: bold; color: #e67e22; background: rgba(0,0,0,0.6); display: inline-block; padding: 5px 14px; border-radius: 50px; margin: 6px 0 10px; }
-    .hero-btn { background: #e67e22; border: none; padding: 8px 18px; font-size: 0.8rem; font-weight: bold; border-radius: 50px; color: white; cursor: pointer; transition: 0.2s; }
-    .hero-btn:hover { background: #f39c12; transform: scale(1.02); }
+    .hero-features span { background: rgba(0,0,0,0.6); backdrop-filter: blur(2px); padding: 4px 10px; border-radius: 30px; border-left: 2px solid #e63946; font-size: 0.65rem; white-space: nowrap; color: white; }
+    .price-highlight { font-size: 1.2rem; font-weight: bold; color: #e63946; background: rgba(0,0,0,0.6); display: inline-block; padding: 5px 14px; border-radius: 50px; margin: 6px 0 10px; }
+    .hero-btn { background: #e63946; border: none; padding: 8px 18px; font-size: 0.8rem; font-weight: bold; border-radius: 50px; color: white; cursor: pointer; transition: 0.2s; }
+    .hero-btn:hover { background: #c1121f; transform: scale(1.02); }
 
     /* ========== APPS GRID ========== */
     .apps-section, .payment-section { margin: 35px 0 20px; text-align: center; }
-    .section-title-custom { font-size: 1.3rem; margin-bottom: 18px; color: #e67e22; border-left: 4px solid #e67e22; padding-left: 12px; display: inline-block; text-align: left; background: rgba(0,0,0,0.3); padding: 8px 15px; border-radius: 50px; }
+    .section-title-custom { font-size: 1.3rem; margin-bottom: 18px; color: #e63946; border-left: 4px solid #e63946; padding-left: 12px; display: inline-block; text-align: left; background: rgba(0,0,0,0.4); padding: 8px 15px; border-radius: 50px; }
     .apps-grid, .payment-grid {
       display: grid; grid-template-columns: repeat(auto-fill, minmax(95px, 1fr));
       gap: 12px; justify-items: center; align-items: center;
-      background: rgba(42, 74, 110, 0.7);
-      backdrop-filter: blur(5px);
+      background: #111111;
       padding: 18px 15px; border-radius: 28px;
-      border: 1px solid rgba(230, 126, 34, 0.3);
+      border: 1px solid rgba(230, 57, 70, 0.2);
       margin-bottom: 20px;
     }
     .forfaits-horizontal {
@@ -174,41 +173,40 @@
       margin: 25px 0 20px;
     }
     .forfait-card {
-      background: rgba(42, 74, 110, 0.8);
-      backdrop-filter: blur(5px);
+      background: #1a1a1a;
       border-radius: 22px;
       padding: 14px 12px;
       width: 160px;
       text-align: center;
-      border: 1px solid rgba(230, 126, 34, 0.3);
+      border: 1px solid rgba(230, 57, 70, 0.3);
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 8px;
       transition: all 0.25s ease;
     }
-    .forfait-card:hover { transform: translateY(-4px); border-color: #e67e22; background: rgba(230, 126, 34, 0.2); }
-    .forfait-name { font-size: 1.1rem; font-weight: 700; color: #e67e22; }
-    .forfait-price { font-size: 1.4rem; font-weight: 800; color: #e67e22; background: rgba(0,0,0,0.4); padding: 3px 10px; border-radius: 50px; display: inline-block; }
-    .forfait-price span { font-size: 0.65rem; color: #ccc; }
-    .btn-forfait { background: #e67e22; border: none; padding: 6px 12px; border-radius: 40px; font-weight: bold; font-size: 0.7rem; color: white; cursor: pointer; width: 100%; }
-    .btn-forfait:hover { background: #f39c12; }
+    .forfait-card:hover { transform: translateY(-4px); border-color: #e63946; background: #2a2a2a; }
+    .forfait-name { font-size: 1.1rem; font-weight: 700; color: #e63946; }
+    .forfait-price { font-size: 1.4rem; font-weight: 800; color: #e63946; background: #0a0a0a; padding: 3px 10px; border-radius: 50px; display: inline-block; }
+    .forfait-price span { font-size: 0.65rem; color: #aaaaaa; }
+    .btn-forfait { background: #e63946; border: none; padding: 6px 12px; border-radius: 40px; font-weight: bold; font-size: 0.7rem; color: white; cursor: pointer; width: 100%; }
+    .btn-forfait:hover { background: #c1121f; }
     .whatsapp-btn { background: #25D366; border: none; padding: 6px 12px; border-radius: 40px; font-weight: bold; font-size: 0.7rem; color: white; cursor: pointer; width: 100%; text-decoration: none; display: inline-block; }
-    .app-icon-card, .payment-card { background: rgba(26, 58, 92, 0.6); border-radius: 18px; padding: 10px 6px; width: 100%; text-align: center; border: 1px solid rgba(230, 126, 34, 0.3); display: flex; flex-direction: column; align-items: center; gap: 6px; transition: all 0.2s ease; }
+    .app-icon-card, .payment-card { background: #1a1a1a; border-radius: 18px; padding: 10px 6px; width: 100%; text-align: center; border: 1px solid rgba(230, 57, 70, 0.2); display: flex; flex-direction: column; align-items: center; gap: 6px; transition: all 0.2s ease; }
     .payment-card { cursor: default; }
-    .app-icon-card img, .payment-card img { width: 50px; height: 50px; object-fit: contain; background: rgba(0,0,0,0.3); padding: 4px; border-radius: 10px; }
-    .app-icon-card span, .payment-card span { font-size: 0.65rem; font-weight: 500; color: #ddd; }
-    .info-note { background: rgba(0,0,0,0.4); border-radius: 20px; padding: 8px 12px; text-align: center; font-size: 0.65rem; color: #ddd; margin-top: 10px; }
+    .app-icon-card img, .payment-card img { width: 50px; height: 50px; object-fit: contain; background: #0a0a0a; padding: 4px; border-radius: 10px; }
+    .app-icon-card span, .payment-card span { font-size: 0.65rem; font-weight: 500; color: #cccccc; }
+    .info-note { background: #111111; border-radius: 20px; padding: 8px 12px; text-align: center; font-size: 0.65rem; color: #aaaaaa; margin-top: 10px; }
 
     /* ========== PAGE TELECHARGEMENT ========== */
     .downloads-container { display: flex; flex-direction: column; gap: 14px; margin: 20px auto; }
-    .download-item { background: rgba(42, 74, 110, 0.8); backdrop-filter: blur(5px); border-radius: 22px; padding: 12px 15px; border: 1px solid rgba(230, 126, 34, 0.3); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; }
-    .download-info h3 { font-size: 0.9rem; margin-bottom: 4px; color: #e67e22; }
-    .download-code { background: rgba(0,0,0,0.4); padding: 2px 8px; border-radius: 30px; font-size: 0.6rem; color: #e67e22; display: inline-block; }
+    .download-item { background: #1a1a1a; border-radius: 22px; padding: 12px 15px; border: 1px solid rgba(230, 57, 70, 0.2); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; }
+    .download-info h3 { font-size: 0.9rem; margin-bottom: 4px; color: #e63946; }
+    .download-code { background: #0a0a0a; padding: 2px 8px; border-radius: 30px; font-size: 0.6rem; color: #e63946; display: inline-block; }
     .download-actions { display: flex; gap: 8px; }
     .download-link-btn, .copy-code-btn { padding: 5px 12px; border-radius: 30px; font-size: 0.6rem; font-weight: bold; cursor: pointer; border: none; }
-    .download-link-btn { background: #e67e22; color: white; }
-    .copy-code-btn { background: rgba(0,0,0,0.5); border: 1px solid rgba(230, 126, 34, 0.5); color: #ddd; }
+    .download-link-btn { background: #e63946; color: white; }
+    .copy-code-btn { background: #2a2a2a; border: 1px solid rgba(230, 57, 70, 0.4); color: #cccccc; }
 
     /* ========== MODAL ========== */
     .modal-overlay {
@@ -221,37 +219,36 @@
     }
     .modal-overlay.active { display: flex; }
     .modal-card {
-      background: #1a3a5c;
+      background: #1a1a1a;
       border-radius: 28px;
       padding: 20px;
       max-width: 95%;
       width: 800px;
       max-height: 85vh;
       overflow-y: auto;
-      border: 1px solid #e67e22;
+      border: 1px solid #e63946;
     }
-    .modal-card h2 { font-size: 1.3rem; margin-bottom: 12px; border-left: 4px solid #e67e22; padding-left: 12px; color: #e67e22; }
+    .modal-card h2 { font-size: 1.3rem; margin-bottom: 12px; border-left: 4px solid #e63946; padding-left: 12px; color: #e63946; }
     .modal-section { margin-bottom: 20px; }
-    .modal-section h3 { font-size: 1rem; margin-bottom: 8px; color: #f5a623; border-bottom: 1px solid rgba(230,126,34,0.3); padding-bottom: 4px; }
+    .modal-section h3 { font-size: 1rem; margin-bottom: 8px; color: #f5a623; border-bottom: 1px solid rgba(230,57,70,0.3); padding-bottom: 4px; }
     .channel-list { display: flex; flex-wrap: wrap; gap: 6px; max-height: 250px; overflow-y: auto; padding: 5px; }
-    .channel-tag { background: rgba(0,0,0,0.5); padding: 4px 10px; border-radius: 30px; font-size: 0.7rem; color: #ddd; border: 1px solid rgba(230,126,34,0.3); white-space: nowrap; }
-    .close-modal-btn { background: #e67e22; border: none; padding: 8px 24px; border-radius: 40px; font-weight: bold; cursor: pointer; margin-top: 16px; font-size: 0.8rem; color: white; }
-    /* Style pour les options de test */
+    .channel-tag { background: #0a0a0a; padding: 4px 10px; border-radius: 30px; font-size: 0.7rem; color: #dddddd; border: 1px solid rgba(230,57,70,0.3); white-space: nowrap; }
+    .close-modal-btn { background: #e63946; border: none; padding: 8px 24px; border-radius: 40px; font-weight: bold; cursor: pointer; margin-top: 16px; font-size: 0.8rem; color: white; }
     .test-options { display: flex; flex-direction: column; gap: 12px; margin: 20px 0; }
-    .test-option-btn { background: #2a4a6e; border: 1px solid #e67e22; padding: 12px 16px; border-radius: 60px; color: #e9dbbc; font-weight: bold; cursor: pointer; transition: all 0.2s; text-align: center; }
-    .test-option-btn:hover { background: #e67e22; color: #0b0b0b; transform: scale(1.02); }
+    .test-option-btn { background: #2a2a2a; border: 1px solid #e63946; padding: 12px 16px; border-radius: 60px; color: #dddddd; font-weight: bold; cursor: pointer; transition: all 0.2s; text-align: center; }
+    .test-option-btn:hover { background: #e63946; color: white; transform: scale(1.02); }
     .contact-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 18px; }
-    .contact-icon-btn { display: inline-flex; align-items: center; gap: 6px; background: rgba(42, 74, 110, 0.8); padding: 8px 16px; border-radius: 50px; text-decoration: none; color: #ddd; font-weight: 600; font-size: 0.7rem; border: 1px solid rgba(230, 126, 34, 0.3); }
+    .contact-icon-btn { display: inline-flex; align-items: center; gap: 6px; background: #2a2a2a; padding: 8px 16px; border-radius: 50px; text-decoration: none; color: #dddddd; font-weight: 600; font-size: 0.7rem; border: 1px solid rgba(230, 57, 70, 0.3); }
     .contact-icon-btn img { width: 18px; height: 18px; filter: brightness(0) invert(1); }
-    .contact-form { background: rgba(42, 74, 110, 0.8); border-radius: 24px; padding: 18px; margin-bottom: 18px; }
-    .form-group input, .form-group textarea { width: 100%; background: rgba(26, 58, 92, 0.8); border: 1px solid rgba(230, 126, 34, 0.3); padding: 8px; border-radius: 16px; color: #f0f0f0; font-size: 0.8rem; }
-    .btn-send { background: #e67e22; border: none; padding: 8px; border-radius: 40px; font-weight: bold; cursor: pointer; width: 100%; font-size: 0.8rem; color: white; }
-    .promos-slider-container { background: rgba(42, 74, 110, 0.8); border-radius: 28px; padding: 16px; margin-bottom: 18px; }
+    .contact-form { background: #1a1a1a; border-radius: 24px; padding: 18px; margin-bottom: 18px; }
+    .form-group input, .form-group textarea { width: 100%; background: #0a0a0a; border: 1px solid rgba(230, 57, 70, 0.3); padding: 8px; border-radius: 16px; color: #ffffff; font-size: 0.8rem; }
+    .btn-send { background: #e63946; border: none; padding: 8px; border-radius: 40px; font-weight: bold; cursor: pointer; width: 100%; font-size: 0.8rem; color: white; }
+    .promos-slider-container { background: #1a1a1a; border-radius: 28px; padding: 16px; margin-bottom: 18px; }
     .slider-image { width: 100%; max-height: 200px; object-fit: cover; border-radius: 20px; }
-    footer { background: rgba(26, 58, 92, 0.9); border-top: 1px solid rgba(230, 126, 34, 0.3); padding: 20px 15px; text-align: center; font-size: 0.65rem; color: #ddd; }
+    footer { background: #0a0a0a; border-top: 1px solid rgba(230, 57, 70, 0.3); padding: 20px 15px; text-align: center; font-size: 0.65rem; color: #aaaaaa; }
     .page-hero.centered { text-align: center; margin-bottom: 12px; }
-    .page-hero.centered h1 { font-size: 1.4rem; color: #e67e22; text-shadow: 0 0 10px rgba(0,0,0,0.5); }
-    .page-hero.centered p { font-size: 0.75rem; color: #ccc; }
+    .page-hero.centered h1 { font-size: 1.4rem; color: #e63946; text-shadow: 0 0 10px rgba(0,0,0,0.5); }
+    .page-hero.centered p { font-size: 0.75rem; color: #cccccc; }
 
     @media (min-width: 768px) {
       .top-nav { padding: 18px 40px; }
@@ -306,9 +303,9 @@
 <div id="paymentContactModal" class="modal-overlay">
   <div class="modal-card"><h2>💬 Contacter le support</h2><p>📦 Paiement & informations :</p>
     <div style="display:flex; flex-direction:column; gap:12px; margin:20px 0;">
-      <a href="https://wa.me/212670965351" target="_blank" style="background:#2a4a6e; padding:10px; border-radius:60px; text-decoration:none; color:#ddd; text-align:center; font-size:0.8rem; border:1px solid #e67e22;">📱 WhatsApp +212 670 965 351</a>
-      <a href="https://www.facebook.com/streamzoneOF/" target="_blank" style="background:#2a4a6e; padding:10px; border-radius:60px; text-decoration:none; color:#ddd; text-align:center; font-size:0.8rem; border:1px solid #e67e22;">📘 Facebook streamzoneOF</a>
-      <a href="https://t.me/KarimAbuRida" target="_blank" style="background:#2a4a6e; padding:10px; border-radius:60px; text-decoration:none; color:#ddd; text-align:center; font-size:0.8rem; border:1px solid #e67e22;">✈️ Telegram @KarimAbuRida</a>
+      <a href="https://wa.me/212670965351" target="_blank" style="background:#2a2a2a; padding:10px; border-radius:60px; text-decoration:none; color:#dddddd; text-align:center; font-size:0.8rem; border:1px solid #e63946;">📱 WhatsApp +212 670 965 351</a>
+      <a href="https://www.facebook.com/streamzoneOF/" target="_blank" style="background:#2a2a2a; padding:10px; border-radius:60px; text-decoration:none; color:#dddddd; text-align:center; font-size:0.8rem; border:1px solid #e63946;">📘 Facebook streamzoneOF</a>
+      <a href="https://t.me/KarimAbuRida" target="_blank" style="background:#2a2a2a; padding:10px; border-radius:60px; text-decoration:none; color:#dddddd; text-align:center; font-size:0.8rem; border:1px solid #e63946;">✈️ Telegram @KarimAbuRida</a>
     </div>
     <button class="close-modal-btn" onclick="closePaymentModal()">Fermer</button>
   </div>
@@ -406,7 +403,7 @@
     const modalHTML = `
       <div class="modal-card">
         <h2>🧪 TEST 24H — Choisissez votre version</h2>
-        <p style="margin-bottom: 16px; color: #ddd4c0;">Sélectionnez le type de test que vous souhaitez essayer :</p>
+        <p style="margin-bottom: 16px; color: #cccccc;">Sélectionnez le type de test que vous souhaitez essayer :</p>
         <div class="test-options">
           <div class="test-option-btn" data-test-type="TEST BASIC">🔹 TEST BASIC (contenu BASIC 24h)</div>
           <div class="test-option-btn" data-test-type="TEST STANDARD">🔸 TEST STANDARD (contenu STANDARD 24h)</div>
@@ -513,7 +510,7 @@
     { name: "Sendwave", icon: "https://raw.githubusercontent.com/MARKETTV1/images-png/refs/heads/main/images/sendwave.png" },
     { name: "CashPlus", icon: "https://raw.githubusercontent.com/MARKETTV1/images-png/refs/heads/main/images/cashplus.png" }
   ];
-  const promoImages = ["https://placehold.co/800x400/1a3a5c/e67e22?text=Promo+1", "https://placehold.co/800x400/1a3a5c/e67e22?text=Promo+2", "https://placehold.co/800x400/1a3a5c/e67e22?text=Promo+3"];
+  const promoImages = ["https://placehold.co/800x400/111111/e63946?text=Promo+1", "https://placehold.co/800x400/111111/e63946?text=Promo+2", "https://placehold.co/800x400/111111/e63946?text=Promo+3"];
   let sliderInterval, currentImageIndex = 0;
   function startSlider() { if (sliderInterval) clearInterval(sliderInterval); sliderInterval = setInterval(() => { currentImageIndex = (currentImageIndex + 1) % promoImages.length; const img = document.getElementById("promosSliderImg"); if (img) img.src = promoImages[currentImageIndex]; }, 2000); }
   function stopSlider() { if (sliderInterval) clearInterval(sliderInterval); }
@@ -521,7 +518,7 @@
 
   const pagesData = {
     accueil: { title: "Forfaits IPTV nouvelle génération", desc: "Qualité premium, streaming sans faille", content: `
-      <div class="hero-banner"><img src="https://raw.githubusercontent.com/MARKETTV1/images-png/refs/heads/main/acceuil.jpg" onerror="this.src='https://placehold.co/800x350/1a3a5c/e67e22?text=StreamZone'"><div class="hero-overlay"><div class="pre-title">📡 Forfait IPTV/OTT</div><h1>StreamZone Premium</h1><div class="hero-features"><span>✨ Serveur très stable sans coupure</span><span>🔄 Mises à jour quotidiennes</span><span>📆 Service 7j/7</span><span>📺 SD / HD / FHD / 4K</span><span>🌍 +200 pays & régions</span></div><div class="price-highlight">💰 À partir de 15€</div><button class="hero-btn" id="heroForfaitsBtn">📦 Découvrir Nos Forfaits</button></div></div>
+      <div class="hero-banner"><img src="https://raw.githubusercontent.com/MARKETTV1/images-png/refs/heads/main/acceuil.jpg" onerror="this.src='https://placehold.co/800x350/111111/e63946?text=StreamZone'"><div class="hero-overlay"><div class="pre-title">📡 Forfait IPTV/OTT</div><h1>StreamZone Premium</h1><div class="hero-features"><span>✨ Serveur très stable sans coupure</span><span>🔄 Mises à jour quotidiennes</span><span>📆 Service 7j/7</span><span>📺 SD / HD / FHD / 4K</span><span>🌍 +200 pays & régions</span></div><div class="price-highlight">💰 À partir de 15€</div><button class="hero-btn" id="heroForfaitsBtn">📦 Découvrir Nos Forfaits</button></div></div>
       <div class="apps-section"><div style="text-align:center;"><h2 class="section-title-custom">📱 Applications IPTV compatibles</h2></div><div class="apps-grid" id="dynamicAppsGrid"></div></div>
       <div class="payment-section"><div style="text-align:center;"><h2 class="section-title-custom">💳 Moyens de paiement</h2></div><div class="payment-grid" id="paymentMethodsGrid"></div><div class="info-note">Moyens de paiement acceptés — Contactez-nous</div></div>
     ` },
@@ -540,8 +537,8 @@
     document.querySelectorAll(".nav-links li").forEach(li => { li.classList.remove("active-page"); if (li.getAttribute("data-page") === pageId) li.classList.add("active-page"); });
     
     if (pageId === "accueil") {
-      document.getElementById("dynamicAppsGrid").innerHTML = appsList.map(app => `<div class="app-icon-card" onclick="alert('🔗 ${app.name} : disponible sur store officiel.')"><img src="${app.icon}" onerror="this.src='https://placehold.co/50x50/1a3a5c/e67e22'"><span>${app.name}</span></div>`).join('');
-      document.getElementById("paymentMethodsGrid").innerHTML = paymentMethods.map(m => `<div class="payment-card"><img src="${m.icon}" onerror="this.src='https://placehold.co/50x50/1a3a5c/e67e22'"><span>${m.name}</span></div>`).join('');
+      document.getElementById("dynamicAppsGrid").innerHTML = appsList.map(app => `<div class="app-icon-card" onclick="alert('🔗 ${app.name} : disponible sur store officiel.')"><img src="${app.icon}" onerror="this.src='https://placehold.co/50x50/1a1a1a/e63946'"><span>${app.name}</span></div>`).join('');
+      document.getElementById("paymentMethodsGrid").innerHTML = paymentMethods.map(m => `<div class="payment-card"><img src="${m.icon}" onerror="this.src='https://placehold.co/50x50/1a1a1a/e63946'"><span>${m.name}</span></div>`).join('');
       document.getElementById("heroForfaitsBtn")?.addEventListener("click", () => renderPage("forfaits"));
     }
     if (pageId === "forfaits") {
